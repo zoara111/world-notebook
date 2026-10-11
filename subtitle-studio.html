@@ -313,13 +313,13 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
     const token=++epoch;busy=true;updateControls();player.pause();invalidate();$('progress').hidden=false;$('progress').value=0;status('开始导出成片');
     const video=document.createElement('video');video.playsInline=true;video.preload='auto';video.style.cssText='position:fixed;width:1px;height:1px;left:0;bottom:0;opacity:0;pointer-events:none';document.body.append(video);
     const exportCanvas=document.createElement('canvas'),d=C.dimensions(player.videoWidth,player.videoHeight,Number($('resolution').value));exportCanvas.width=d.width;exportCanvas.height=d.height;const ec=exportCanvas.getContext('2d');let audioCtx,stream,recorder,stopClock,wakeLock,abort=false;
+    exportCancel=()=>{abort=true;video.pause();if(recorder&&recorder.state!=='inactive')recorder.stop();};
     try{
       const loaded=waitEvent(video,'loadeddata');video.src=sourceUrl;video.load();await loaded;if(token!==epoch)return;
       const AC=window.AudioContext||window.webkitAudioContext;audioCtx=new AC();await audioCtx.resume();const audioNode=audioCtx.createMediaElementSource(video),dest=audioCtx.createMediaStreamDestination();audioNode.connect(dest);
       stream=exportCanvas.captureStream(30);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
       recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:6_000_000,audioBitsPerSecond:128000});const parts=[];recorder.ondataavailable=e=>{if(e.data.size)parts.push(e.data);};
       const stopped=new Promise((resolve,reject)=>{recorder.onstop=resolve;recorder.onerror=e=>reject(new Error(e.error?.message||'录制失败'));});
-      exportCancel=()=>{abort=true;video.pause();if(recorder&&recorder.state!=='inactive')recorder.stop();};
       const draw=()=>{if(abort||video.readyState<2)return;ec.drawImage(video,0,0,d.width,d.height);R.draw(ec,d.width,d.height,C.active(cues,video.currentTime),video.currentTime,style);ctx.drawImage(exportCanvas,0,0,canvas.width,canvas.height);$('progress').value=100*video.currentTime/video.duration;$('export-status').textContent=`录制中 · ${time(video.currentTime)} / ${time(video.duration)} · 请保持页面在前台`;};
       ec.drawImage(video,0,0,d.width,d.height);R.draw(ec,d.width,d.height,C.active(cues,0),0,style);recorder.start(1000);
       video.onended=()=>{draw();if(recorder.state!=='inactive')recorder.stop();};
@@ -336,10 +336,11 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
   $('demo').onclick=async()=>{
     if(busy)return;const mime=recorderType();if(!mime)return status('此浏览器无法创建演示视频，请导入自己的视频',true);
     busy=true;updateControls();$('cancel').hidden=true;status('准备有声音的演示视频…');let ac,stream,recorder,stopClock,ended;
+    const previousLanguage=$('language').value;
     try{const audioData=Uint8Array.from(atob($('demo-audio').textContent.trim()),c=>c.charCodeAt(0));ac=new AudioContext();await ac.resume();const b=await ac.decodeAudioData(audioData.buffer),dest=ac.createMediaStreamDestination(),node=ac.createBufferSource();node.buffer=b;node.connect(dest);
       const photo=$('demo-photo');await photo.decode();const dc=document.createElement('canvas');dc.width=640;dc.height=360;const dx=dc.getContext('2d');stream=dc.captureStream(24);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:1000000});const parts=[];recorder.ondataavailable=e=>{if(e.data.size)parts.push(e.data);};ended=new Promise((resolve,reject)=>{recorder.onstop=resolve;recorder.onerror=reject;});const start=ac.currentTime;const paint=()=>{const t=ac.currentTime-start,z=1+t*.004,sw=photo.naturalWidth/z,sh=sw*360/640;dx.drawImage(photo,(photo.naturalWidth-sw)/2,(photo.naturalHeight-sh)/2,sw,sh,0,0,640,360);};paint();stopClock=renderClock(paint,24);recorder.start();node.onended=()=>recorder.stop();node.start();await ended;stopClock();stopClock=null;const file=new File(parts,'演示-公共演讲.'+(mime.includes('mp4')?'mp4':'webm'),{type:mime});busy=false;updateControls();$('language').value='en';await importVideo(file);
     }catch(e){status('演示视频未能创建：'+e.message,true);}
-    finally{if(stopClock)stopClock();if(stream)stream.getTracks().forEach(t=>t.stop());if(ac)await ac.close();busy=false;updateControls();}
+    finally{$('language').value=previousLanguage;if(stopClock)stopClock();if(stream)stream.getTracks().forEach(t=>t.stop());if(ac)await ac.close();busy=false;updateControls();}
   };
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&exportCancel){exportCancel();$('export-status').textContent='页面离开前台，已停止录制以避免成片缺帧；请回到本页重新导出';}});
   window.addEventListener('beforeunload',()=>{stopWorker();if(sourceUrl)URL.revokeObjectURL(sourceUrl);if(resultUrl)URL.revokeObjectURL(resultUrl);});
