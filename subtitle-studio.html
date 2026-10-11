@@ -1,6 +1,210 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><!-- Lucide 0.468.0
+<head><!-- Diff Match and Patch. Copyright 2018 The diff-match-patch Authors. Unmodified JavaScript from google/diff-match-patch commit 62f2e689f498f9c92dbc588c58750addec9b1654. Apache-2.0
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+--><!-- Lucide 0.468.0
 ISC License
 
 Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
@@ -19,12 +223,13 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 Demo photograph: Luca Bravo / Unsplash. Demo speech: JFK inaugural address, public domain US government recording, HF Transformers.js documentation fixture. See SUBTITLE-STUDIO.md for attribution and dependency licenses. --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="世界书视频字幕：本机语音识别、逐字字幕、样式编辑与视频导出"><title>字幕工坊 · 万物手记</title><style>:root{font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;color:#28312f;background:#f6f8f7;--line:#dce4e0;--muted:#6c7974;--green:#087c70;letter-spacing:0}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,.button{border:1px solid var(--line);border-radius:5px;min-height:36px;padding:8px 12px;background:#fff;color:inherit;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:12px;cursor:pointer;text-decoration:none}button:hover,.button:hover{border-color:var(--green)}button:disabled{opacity:.45;cursor:default}button.primary,.button.primary{background:var(--green);color:white;border-color:var(--green)}button.selected{border-color:var(--green);background:#eaf5ef;color:#08695e}.icon{width:32px;height:32px;min-height:32px;padding:6px;border-color:transparent}.icon svg,button svg,.button svg{width:16px;height:16px;flex-shrink:0}a{color:var(--green);text-decoration:none}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,.button:focus-visible{outline:3px solid #cc922c;outline-offset:2px}header{height:64px;display:flex;align-items:center;gap:30px;background:white;border-bottom:1px solid var(--line);padding:0 max(20px,calc((100vw - 1420px)/2));white-space:nowrap}.brand{display:flex;align-items:center;gap:9px;color:#25382f;font-size:17px;font-weight:750}.brand svg{color:#2453c8;width:22px}header nav{display:flex;align-self:stretch;gap:26px;align-items:stretch}header nav a{font-size:12px;color:var(--muted);display:flex;align-items:center;border-bottom:2px solid transparent}header nav a.active{color:var(--green);border-bottom-color:var(--green)}.back{margin-left:auto;display:flex}.back svg{width:18px}main{max-width:1460px;padding:25px 24px;margin:auto}.page-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}.crumb{font-size:11px;color:var(--muted);margin-bottom:5px}h1{font-size:24px;line-height:1.3;margin:0}h2{font-size:14px;margin:0;font-weight:650}.top-actions{display:flex;gap:9px}.workspace{display:grid;grid-template-columns:minmax(280px,1.4fr) minmax(260px,1fr) 246px;gap:24px}.preview-panel,.timeline-panel,.style-panel{min-width:0}.stage{background:#1b1d21;border-radius:6px;overflow:hidden;position:relative;min-height:230px;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;border:1px solid #34383b}.stage.dragging{outline:3px solid #c79c39;outline-offset:2px}.stage canvas{display:block;width:100%;height:100%;object-fit:contain}.stage.empty canvas{visibility:hidden}.drop-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:17px;color:#d4dbd7}.drop-content>svg{width:37px;height:37px;color:#91b8a7}.drop-content h2{font-size:19px;font-weight:500}.drop-content small{font-size:11px;color:#9caba4}.stage:not(.empty) .drop-content{display:none}.transport{display:flex;align-items:center;gap:6px;margin:9px 0}.transport input{min-width:30px;flex:1}.transport output{white-space:nowrap;font-variant-numeric:tabular-nums;font-size:10px;color:var(--muted);min-width:80px}.file-info{font-size:11px;display:flex;justify-content:space-between;gap:10px;color:var(--muted);padding:0 3px 14px;border-bottom:1px solid var(--line)}#filename{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.section-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 16px}.section-label>div{display:flex}.section-label>span{font-size:10px;color:var(--muted)}.section-label h2 span{font-weight:400;color:var(--muted);font-size:11px;margin-left:6px}.local{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--green)!important}.local svg{width:13px;height:13px}.recognition,.export{padding-top:19px}.recognition-fields{display:grid;grid-template-columns:1fr 1.2fr;gap:11px}.recognition-fields>.check{grid-column:1/-1}label{font-size:11px;color:#52665c;display:block}label>select,label>input:not([type=checkbox]){display:block;width:100%;margin-top:7px}input[type=number],select{height:33px;padding:5px 7px;border:1px solid var(--line);border-radius:4px;background:white;color:#2e3e36;font-size:11px;min-width:0}input[type=range]{accent-color:var(--green);cursor:pointer;width:100%;height:17px}input[type=color]{padding:2px;height:28px;background:white;border:1px solid var(--line);border-radius:4px}input[type=checkbox]{accent-color:var(--green);margin:0}.check{display:flex;align-items:center;gap:7px;min-height:26px}.recognition-buttons{display:flex;gap:8px;margin:11px 0}#status{font-size:11px;color:#536b5f;line-height:1.65;overflow-wrap:anywhere;min-height:19px}#status.error{color:#aa3435}.privacy,.accuracy,.export p{font-size:10px;line-height:1.8;color:var(--muted);margin:10px 0 0}.privacy{padding-bottom:16px;border-bottom:1px solid var(--line)}progress{width:100%;accent-color:var(--green);height:7px}progress:not([value]){animation:progress-pulse 1.8s infinite}@keyframes progress-pulse{50%{opacity:.45}}.export-actions{display:flex;flex-wrap:wrap;gap:8px}.export-actions select{width:72px;height:36px;margin-left:auto}.small-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.small-actions button{font-size:10px;min-height:30px;padding:6px 8px}.timeline-panel{border-left:1px solid var(--line);padding-left:24px}.timeline-tools{display:grid;grid-template-columns:1fr 30px 1fr 30px;gap:6px;align-items:end;margin-bottom:15px}.timeline-tools label{font-size:10px}.timeline-tools button{width:30px;height:33px;min-height:33px;padding:6px}.timeline-tools input{width:100%;min-width:0}.cue-list{height:555px;overflow:auto;padding-right:5px;scrollbar-width:thin}.empty-list{height:240px;display:grid;align-content:center;justify-items:center;color:#9aa59f;font-size:12px;gap:3px}.empty-list svg{width:30px;height:30px}.cue{padding:12px 10px;border-bottom:1px solid var(--line);background:white}.cue.active{border-left:3px solid var(--green);padding-left:7px;background:#eef6f2}.cue-head{display:flex;align-items:center;gap:6px;margin-bottom:8px}.cue-head .number{color:#8b9690;font-size:10px;margin-right:auto;font-variant-numeric:tabular-nums}.cue-head input{width:68px;height:28px;font-size:10px}.cue-head .icon{width:24px;height:26px;min-height:26px;padding:4px}.cue textarea{width:100%;resize:vertical;min-height:48px;border:1px solid transparent;border-radius:3px;background:transparent;color:#2c3c33;line-height:1.65;padding:4px;font:12px system-ui;display:block}.cue textarea:focus{border-color:var(--green);background:white;outline:none}.style-panel{border-left:1px solid var(--line);padding-left:22px}.presets{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:19px}.presets button{padding:7px 1px;font-size:10px;flex-direction:column;gap:5px}.sample{font-size:18px;font-weight:750;display:grid;place-items:center;width:30px;height:28px;background:#282d30;border-radius:3px}.sample.clean{color:#fff;text-shadow:1px 1px black}.sample.cinema{color:#f3eddf;font-family:serif}.sample.pop{color:#ffe073}.sample.label{color:white;background:#426a98}.style-panel>label,.style-panel>.two{margin-bottom:16px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.two .weight{align-self:end;height:33px}.two svg{width:14px;height:14px}.style-panel label>output{float:right;color:var(--muted);font-variant-numeric:tabular-nums}.subheading{border-top:1px solid var(--line);padding-top:16px;font-size:12px;margin:17px 0 12px}.position-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;width:122px;margin-bottom:16px}.position-grid button{height:31px;min-height:31px;padding:5px}.colors{gap:15px}footer{border-top:1px solid var(--line);padding-top:17px;margin-top:27px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--muted)}[hidden]{display:none!important}@media(max-width:1050px){.workspace{grid-template-columns:minmax(300px,1.3fr) minmax(250px,1fr)}.style-panel{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px}.style-panel>.section-label,.style-panel>.subheading{grid-column:1/-1}.style-panel>.presets{grid-row:span 2}.position-grid{width:132px}.cue-list{height:560px}}@media(max-width:650px){header{gap:18px;padding:0 15px;height:58px}.brand{font-size:14px}.brand svg{width:18px}header nav{gap:15px}header nav a{font-size:11px}main{padding:20px 15px}.back{display:none}h1{font-size:22px}.page-head{gap:8px}.top-actions{gap:5px}.top-actions button,.top-actions .button{padding:7px 8px;font-size:10px;gap:4px}.workspace{grid-template-columns:minmax(0,1fr);gap:22px}.stage{min-height:190px}.timeline-panel{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.cue-list{height:340px}.style-panel{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}.style-panel>.presets{grid-column:1/-1;grid-row:auto;max-width:320px}.privacy,.accuracy{font-size:11px}footer{line-height:1.8}.transport output{min-width:82px}.cue-head input{width:76px}.timeline-tools{grid-template-columns:minmax(70px,1fr) 30px minmax(60px,1fr) 30px}}@media(prefers-reduced-motion:reduce){progress{animation:none!important}}
 :root .stage{width:100%;min-width:0}
+.manuscript{padding:17px 0;border-bottom:1px solid var(--line)}.manuscript summary{font-size:14px;font-weight:650;cursor:pointer;color:#28312f}.manuscript summary span{font-size:10px;font-weight:400;color:var(--muted);margin-left:8px}.script-toolbar,.script-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:12px 0 8px}.script-toolbar>span{font-size:10px;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.script-toolbar button{font-size:10px;min-height:30px;padding:6px 8px}.script-toolbar .icon{width:30px;padding:5px}.manuscript textarea{width:100%;min-height:105px;max-height:300px;resize:vertical;border:1px solid var(--line);border-radius:4px;background:#fff;color:#2c3c33;padding:10px;font:12px/1.8 system-ui;display:block}.manuscript textarea:focus{outline:2px solid var(--green);outline-offset:1px}#manuscript-drop.dragging{outline:3px solid #c79c39;outline-offset:3px}.script-actions{justify-content:space-between}.script-actions output{font-size:10px;color:var(--muted)}#match-preview{border-top:1px solid var(--line);margin-top:14px;padding-top:12px}#match-preview h3{font-size:12px;margin:0}#match-summary{font-size:11px;line-height:1.8;color:#536b5f}.match-list{max-height:200px;overflow:auto}.match-list p{font-size:12px;line-height:1.7;margin:0;padding:8px 2px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.match-list time{font-size:10px;color:var(--muted);margin-right:7px}.match-list .review-tag{margin-left:6px}.review-tag,.review-count{color:#936517;font-size:10px}.review-count{margin:-6px 0 14px}.cue.needs-review{box-shadow:inset 3px 0 #c49943}.cue-review{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-bottom:3px}.cue-review button{min-height:26px;height:26px;width:26px;padding:4px}.cue textarea:focus-visible{outline:2px solid #cc922c;outline-offset:1px}
 </style></head>
 <body>
 <header><a class="brand" href="index.html#video"><i data-lucide="notebook-tabs"></i>万物手记</a><nav aria-label="影像工具"><a href="photo-studio.html">照片</a><a href="gif-studio.html">动图</a><a class="active" href="subtitle-studio.html" aria-current="page">视频字幕</a></nav><a class="back" href="index.html#video" title="返回目录" aria-label="返回目录"><i data-lucide="layout-grid"></i></a></header>
 <main>
 <div class="page-head"><div><div class="crumb">影像 / 视频</div><h1>字幕工坊</h1></div><div class="top-actions"><button id="demo" aria-label="载入演示视频" title="载入演示视频"><i data-lucide="clapperboard"></i><span>演示视频</span></button><label class="button primary" for="video-file"><i data-lucide="plus"></i><span>导入视频</span></label></div></div>
-<input id="video-file" type="file" accept="video/*,.mp4,.mov,.webm,.m4v" hidden><input id="sub-file" type="file" accept=".srt,.vtt,.json" hidden>
+<input id="video-file" type="file" accept="video/*,.mp4,.mov,.webm,.m4v" hidden><input id="sub-file" type="file" accept=".srt,.vtt,.json" hidden><input id="script-file" type="file" accept=".txt,text/plain" hidden>
 <div class="workspace">
 <section class="preview-panel" aria-label="视频预览">
 <div id="drop" class="stage empty"><canvas id="preview" width="960" height="540" aria-label="带字幕的视频画面"></canvas><div class="drop-content"><i data-lucide="film"></i><h2>把视频放在这里</h2><button id="choose"><i data-lucide="upload"></i>选择视频</button><small>MP4 / MOV / WebM</small></div></div>
@@ -32,9 +237,10 @@ Demo photograph: Luca Bravo / Unsplash. Demo speech: JFK inaugural address, publ
 <div class="transport"><button id="play" class="icon" title="播放或暂停" aria-label="播放或暂停" disabled><i data-lucide="play"></i></button><input id="scrub" type="range" min="0" max="1" step="0.01" value="0" aria-label="播放位置" disabled><output id="time">00:00 / 00:00</output><button id="mute" class="icon" title="静音" aria-label="静音" disabled><i data-lucide="volume-2"></i></button></div>
 <div class="file-info"><span id="filename">未导入视频</span><span id="dimensions">—</span></div>
 <div class="recognition"><div class="section-label"><h2>语音识别</h2><span class="local"><i data-lucide="shield-check"></i>本机处理</span></div><div class="recognition-fields"><label>语音语言<select id="language"><option value="zh">中文</option><option value="auto">自动检测</option><option value="en">英语</option><option value="ja">日语</option><option value="ko">韩语</option><option value="fr">法语</option><option value="es">西班牙语</option></select></label><label>计算方式<select id="device"><option value="auto">自动 / 优先 GPU</option><option value="wasm">CPU / 兼容模式</option></select></label><label class="check"><input id="auto" type="checkbox" checked>导入后自动识别</label></div><div class="recognition-buttons"><button id="recognize" class="primary" disabled><i data-lucide="audio-lines"></i>生成字幕</button><button id="cancel" hidden><i data-lucide="square"></i>取消</button></div><progress id="progress" max="100" value="0" hidden></progress><div id="status" role="status" aria-live="polite">等待视频</div><p class="privacy">视频和声音不上传。首次识别需联网下载模型（约 80–220 MB），由 Hugging Face / jsDelivr 提供；模型下载会产生普通网络请求</p></div>
+<details class="manuscript" open><summary>原文稿 <span>可选</span></summary><div class="script-toolbar"><span id="script-name">未导入原稿</span><button id="load-script"><i data-lucide="file-text"></i>导入 TXT</button><button id="clear-script" class="icon" title="清空原稿" aria-label="清空原稿"><i data-lucide="trash-2"></i></button></div><div id="manuscript-drop"><textarea id="manuscript" maxlength="12000" rows="5" aria-label="原文稿" placeholder="粘贴与实际说话一致的原稿"></textarea></div><div class="script-actions"><output id="script-count">0 / 12000</output><button id="match-script" disabled><i data-lucide="text-search"></i>根据语音匹配</button></div><div id="match-preview" hidden><h3>匹配预览</h3><p id="match-summary" role="status" aria-live="polite"></p><div id="match-list" class="match-list" aria-label="原稿匹配预览"></div><div class="script-actions"><button id="discard-match"><i data-lucide="x"></i>放弃预览</button><button id="apply-match" class="primary"><i data-lucide="check"></i>应用匹配</button></div></div></details>
 <div class="export"><div class="section-label"><h2>导出</h2><span id="export-format">视频 / 字幕 / 工程</span></div><div class="export-actions"><button id="export-video" class="primary" disabled><i data-lucide="download"></i>带字幕视频</button><button id="download-video" hidden><i data-lucide="download"></i>下载成片</button><select id="resolution" aria-label="导出分辨率"><option value="1280">720p</option><option value="1920">1080p</option><option value="960">540p</option></select></div><div class="small-actions"><button id="srt" disabled>SRT</button><button id="vtt" disabled>VTT</button><button id="save-project" disabled><i data-lucide="save"></i>工程</button><button id="load-sub"><i data-lucide="folder-open"></i>导入字幕 / 工程</button></div><p id="export-status" role="status">成片按实际时长录制，格式由浏览器决定；SRT/VTT 不包含字体款式</p></div>
 </section>
-<section class="timeline-panel" aria-label="字幕时间轴"><div class="section-label"><h2>字幕时间轴 <span id="cue-count">0</span></h2><div><button id="undo" class="icon" title="撤销字幕编辑" aria-label="撤销字幕编辑" disabled><i data-lucide="undo-2"></i></button><button id="add-cue" class="icon" title="添加字幕" aria-label="添加字幕" disabled><i data-lucide="plus"></i></button></div></div><div class="timeline-tools"><label>整体偏移 / 秒<input id="offset" type="number" min="-60" max="60" step="0.05" value="0"></label><button id="apply-offset" title="应用时间偏移" aria-label="应用时间偏移"><i data-lucide="move-horizontal"></i></button><label>每句字数<input id="line-limit" type="number" min="8" max="60" step="1" value="22"></label><button id="regroup" title="重新分句" aria-label="重新分句" disabled><i data-lucide="list-restart"></i></button></div><div id="cue-list" class="cue-list"><div class="empty-list"><i data-lucide="captions"></i><p>还没有字幕</p></div></div><p class="accuracy" id="accuracy">识别后可校对文本与起止时间。词内汉字逐字时间为近似值</p></section>
+<section class="timeline-panel" aria-label="字幕时间轴"><div class="section-label"><h2>字幕时间轴 <span id="cue-count">0</span></h2><div><button id="review-next" class="icon" title="下一句待校对" aria-label="下一句待校对" hidden><i data-lucide="scan-text"></i></button><button id="undo" class="icon" title="撤销字幕编辑" aria-label="撤销字幕编辑" disabled><i data-lucide="undo-2"></i></button><button id="add-cue" class="icon" title="添加字幕" aria-label="添加字幕" disabled><i data-lucide="plus"></i></button></div></div><div id="review-count" class="review-count" role="status" hidden></div><div class="timeline-tools"><label>整体偏移 / 秒<input id="offset" type="number" min="-60" max="60" step="0.05" value="0"></label><button id="apply-offset" title="应用时间偏移" aria-label="应用时间偏移"><i data-lucide="move-horizontal"></i></button><label>每句字数<input id="line-limit" type="number" min="8" max="60" step="1" value="22"></label><button id="regroup" title="重新分句" aria-label="重新分句" disabled><i data-lucide="list-restart"></i></button></div><div id="cue-list" class="cue-list"><div class="empty-list"><i data-lucide="captions"></i><p>还没有字幕</p></div></div><p class="accuracy" id="accuracy">识别后可校对文本与起止时间。词内汉字逐字时间为近似值</p></section>
 <aside class="style-panel" aria-label="字幕样式"><div class="section-label"><h2>字幕样式</h2><button id="reset-style" class="icon" title="重置样式" aria-label="重置样式"><i data-lucide="rotate-ccw"></i></button></div><div class="presets" role="group" aria-label="款式预设"><button data-preset="clean" class="selected"><span class="sample clean">字</span>清晰</button><button data-preset="cinema"><span class="sample cinema">字</span>电影</button><button data-preset="pop"><span class="sample pop">字</span>亮色</button><button data-preset="label"><span class="sample label">字</span>底框</button></div>
 <label>出现方式<select id="mode"><option value="typewriter">逐字出现</option><option value="karaoke">逐字高亮</option><option value="sentence">整句出现</option></select></label><label>字体<select id="font"><option value="sans">黑体 / 系统无衬线</option><option value="serif">宋体 / 系统衬线</option><option value="mono">等宽</option></select></label><div class="two"><label>字号 / 1080p<input id="font-size" type="number" min="16" max="100" value="48"></label><label class="check weight"><input id="bold" type="checkbox" checked><i data-lucide="bold"></i>粗体</label></div><div class="two colors"><label>文字<input id="color" type="color" value="#ffffff"></label><label>高亮<input id="highlight" type="color" value="#ffe073"></label></div><label>描边 <output id="stroke-value">3</output><input id="stroke" type="range" min="0" max="8" step="0.5" value="3"></label><label>底框透明度 <output id="bg-value">0%</output><input id="bg" type="range" min="0" max="90" step="5" value="0"></label><div class="two colors"><label>描边颜色<input id="outline-color" type="color" value="#161719"></label><label>底框颜色<input id="bg-color" type="color" value="#121416"></label></div><label class="check"><input id="shadow" type="checkbox" checked>阴影</label>
 <div class="subheading">画面位置</div><div class="position-grid" role="group" aria-label="字幕位置"><button data-pos="20,15" title="左上" aria-label="左上"><i data-lucide="arrow-up-left"></i></button><button data-pos="50,15" title="上中" aria-label="上中"><i data-lucide="arrow-up"></i></button><button data-pos="80,15" title="右上" aria-label="右上"><i data-lucide="arrow-up-right"></i></button><button data-pos="20,50" title="左中" aria-label="左中"><i data-lucide="arrow-left"></i></button><button data-pos="50,50" title="居中" aria-label="居中"><i data-lucide="circle-dot"></i></button><button data-pos="80,50" title="右中" aria-label="右中"><i data-lucide="arrow-right"></i></button><button data-pos="20,85" title="左下" aria-label="左下"><i data-lucide="arrow-down-left"></i></button><button data-pos="50,85" class="selected" title="下中" aria-label="下中"><i data-lucide="arrow-down"></i></button><button data-pos="80,85" title="右下" aria-label="右下"><i data-lucide="arrow-down-right"></i></button></div><label>水平 <output id="x-value">50%</output><input id="x" type="range" min="5" max="95" value="50"></label><label>垂直 <output id="y-value">85%</output><input id="y" type="range" min="5" max="95" value="85"></label><label>字幕宽度 <output id="width-value">84%</output><input id="width" type="range" min="30" max="94" value="84"></label></aside>
@@ -120,7 +326,7 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
   }
   function group(units,limit=22,duration=Infinity) {
     const cues=[];let buf=[];
-    const flush=()=>{while(buf[0]&&/^\s+$/.test(buf[0].text))buf.shift();while(buf.at(-1)&&/^\s+$/.test(buf.at(-1).text))buf.pop();if(buf.length){const start=buf[0].start,end=Math.min(duration,Math.max(start+.08,buf.at(-1).end));if(end>start)cues.push({start,end,text:buf.map(u=>u.text).join(''),units:buf.map(u=>({...u}))});}buf=[];};
+    const flush=()=>{while(buf[0]&&/^\s+$/.test(buf[0].text))buf.shift();while(buf.at(-1)&&/^\s+$/.test(buf.at(-1).text))buf.pop();if(buf.length){const start=buf[0].start,end=Math.min(duration,Math.max(start+.08,buf.at(-1).end));if(end>start)cues.push({start,end,text:buf.map(u=>u.text).join(''),units:buf.map(u=>({...u})),review:buf.some(u=>u.alignment==='estimated'||u.alignment==='unmatched')});}buf=[];};
     for (const u of units) {
       const withinWord=buf.length&&/[A-Za-z0-9]/.test(buf.at(-1).text)&&/[A-Za-z0-9]/.test(u.text);
       const punctuation=/^[，。！？,.!?;；:：]$/.test(u.text);
@@ -152,11 +358,138 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
   }
   function validateCues(raw,duration=Infinity) {
     if(!Array.isArray(raw)||raw.length>3000)throw new Error('工程字幕格式不正确');
-    return raw.map(c=>{if(!Number.isFinite(c.start)||!Number.isFinite(c.end)||c.start<0||c.end<=c.start||c.text?.length>300||typeof c.text!=='string')throw new Error('工程中有无效字幕');if(c.start>=duration)return null;const cue=retime(c,c.text,c.start,Math.min(c.end,duration));if(Array.isArray(c.units)&&c.units.length<=300&&c.units.map(u=>u.text).join('')===c.text&&c.units.every(u=>typeof u.text==='string'&&Number.isFinite(u.start)&&Number.isFinite(u.end)&&u.start>=cue.start&&u.end>=u.start&&u.end<=cue.end))cue.units=c.units.map(u=>({...u}));return cue;}).filter(Boolean).sort((a,b)=>a.start-b.start);
+    return raw.map(c=>{if(!Number.isFinite(c.start)||!Number.isFinite(c.end)||c.start<0||c.end<=c.start||c.text?.length>300||typeof c.text!=='string')throw new Error('工程中有无效字幕');if(c.start>=duration)return null;const cue=retime(c,c.text,c.start,Math.min(c.end,duration));if(Array.isArray(c.units)&&c.units.length<=300&&c.units.map(u=>u.text).join('')===c.text&&c.units.every(u=>typeof u.text==='string'&&Number.isFinite(u.start)&&Number.isFinite(u.end)&&u.start>=cue.start&&u.end>=u.start&&u.end<=cue.end))cue.units=c.units.map(u=>({...u}));if(c.review===true)cue.review=true;return cue;}).filter(Boolean).sort((a,b)=>a.start-b.start);
   }
   function shift(cues,offset,duration) {return cues.map(c=>{const start=clamp(c.start+offset,0,duration),end=clamp(c.end+offset,0,duration);if(end<=start)return null;return {...c,start,end,units:c.units.map(u=>({...u,start:clamp(u.start+offset,start,end),end:clamp(u.end+offset,start,end)}))};}).filter(Boolean);}
   function dimensions(w,h,longEdge) {const scale=Math.min(1,longEdge/Math.max(w,h));return {width:Math.max(2,Math.round(w*scale/2)*2),height:Math.max(2,Math.round(h*scale/2)*2)};}
   const api={clamp,graphemes,defaults,presets,style,unitsFromChunks,group,retime,active,stamp,serialize,parseSub,validateCues,shift,dimensions};root.SubtitleCore=api;if(typeof module!=='undefined')module.exports=api;
+})(typeof globalThis==='undefined'?this:globalThis);
+</script><script>var diff_match_patch=function(){this.Diff_Timeout=1;this.Diff_EditCost=4;this.Match_Threshold=.5;this.Match_Distance=1E3;this.Patch_DeleteThreshold=.5;this.Patch_Margin=4;this.Match_MaxBits=32},DIFF_DELETE=-1,DIFF_INSERT=1,DIFF_EQUAL=0;diff_match_patch.Diff=function(a,b){this[0]=a;this[1]=b};diff_match_patch.Diff.prototype.length=2;diff_match_patch.Diff.prototype.toString=function(){return this[0]+","+this[1]};
+diff_match_patch.prototype.diff_main=function(a,b,c,d){"undefined"==typeof d&&(d=0>=this.Diff_Timeout?Number.MAX_VALUE:(new Date).getTime()+1E3*this.Diff_Timeout);if(null==a||null==b)throw Error("Null input. (diff_main)");if(a==b)return a?[new diff_match_patch.Diff(DIFF_EQUAL,a)]:[];"undefined"==typeof c&&(c=!0);var e=c,f=this.diff_commonPrefix(a,b);c=a.substring(0,f);a=a.substring(f);b=b.substring(f);f=this.diff_commonSuffix(a,b);var g=a.substring(a.length-f);a=a.substring(0,a.length-f);b=b.substring(0,
+b.length-f);a=this.diff_compute_(a,b,e,d);c&&a.unshift(new diff_match_patch.Diff(DIFF_EQUAL,c));g&&a.push(new diff_match_patch.Diff(DIFF_EQUAL,g));this.diff_cleanupMerge(a);return a};
+diff_match_patch.prototype.diff_compute_=function(a,b,c,d){if(!a)return[new diff_match_patch.Diff(DIFF_INSERT,b)];if(!b)return[new diff_match_patch.Diff(DIFF_DELETE,a)];var e=a.length>b.length?a:b,f=a.length>b.length?b:a,g=e.indexOf(f);return-1!=g?(c=[new diff_match_patch.Diff(DIFF_INSERT,e.substring(0,g)),new diff_match_patch.Diff(DIFF_EQUAL,f),new diff_match_patch.Diff(DIFF_INSERT,e.substring(g+f.length))],a.length>b.length&&(c[0][0]=c[2][0]=DIFF_DELETE),c):1==f.length?[new diff_match_patch.Diff(DIFF_DELETE,
+a),new diff_match_patch.Diff(DIFF_INSERT,b)]:(e=this.diff_halfMatch_(a,b))?(b=e[1],f=e[3],a=e[4],e=this.diff_main(e[0],e[2],c,d),c=this.diff_main(b,f,c,d),e.concat([new diff_match_patch.Diff(DIFF_EQUAL,a)],c)):c&&100<a.length&&100<b.length?this.diff_lineMode_(a,b,d):this.diff_bisect_(a,b,d)};
+diff_match_patch.prototype.diff_lineMode_=function(a,b,c){var d=this.diff_linesToChars_(a,b);a=d.chars1;b=d.chars2;d=d.lineArray;a=this.diff_main(a,b,!1,c);this.diff_charsToLines_(a,d);this.diff_cleanupSemantic(a);a.push(new diff_match_patch.Diff(DIFF_EQUAL,""));for(var e=d=b=0,f="",g="";b<a.length;){switch(a[b][0]){case DIFF_INSERT:e++;g+=a[b][1];break;case DIFF_DELETE:d++;f+=a[b][1];break;case DIFF_EQUAL:if(1<=d&&1<=e){a.splice(b-d-e,d+e);b=b-d-e;d=this.diff_main(f,g,!1,c);for(e=d.length-1;0<=e;e--)a.splice(b,
+0,d[e]);b+=d.length}d=e=0;g=f=""}b++}a.pop();return a};
+diff_match_patch.prototype.diff_bisect_=function(a,b,c){for(var d=a.length,e=b.length,f=Math.ceil((d+e)/2),g=2*f,h=Array(g),l=Array(g),k=0;k<g;k++)h[k]=-1,l[k]=-1;h[f+1]=0;l[f+1]=0;k=d-e;for(var m=0!=k%2,p=0,x=0,w=0,q=0,t=0;t<f&&!((new Date).getTime()>c);t++){for(var v=-t+p;v<=t-x;v+=2){var n=f+v;var r=v==-t||v!=t&&h[n-1]<h[n+1]?h[n+1]:h[n-1]+1;for(var y=r-v;r<d&&y<e&&a.charAt(r)==b.charAt(y);)r++,y++;h[n]=r;if(r>d)x+=2;else if(y>e)p+=2;else if(m&&(n=f+k-v,0<=n&&n<g&&-1!=l[n])){var u=d-l[n];if(r>=
+u)return this.diff_bisectSplit_(a,b,r,y,c)}}for(v=-t+w;v<=t-q;v+=2){n=f+v;u=v==-t||v!=t&&l[n-1]<l[n+1]?l[n+1]:l[n-1]+1;for(r=u-v;u<d&&r<e&&a.charAt(d-u-1)==b.charAt(e-r-1);)u++,r++;l[n]=u;if(u>d)q+=2;else if(r>e)w+=2;else if(!m&&(n=f+k-v,0<=n&&n<g&&-1!=h[n]&&(r=h[n],y=f+r-n,u=d-u,r>=u)))return this.diff_bisectSplit_(a,b,r,y,c)}}return[new diff_match_patch.Diff(DIFF_DELETE,a),new diff_match_patch.Diff(DIFF_INSERT,b)]};
+diff_match_patch.prototype.diff_bisectSplit_=function(a,b,c,d,e){var f=a.substring(0,c),g=b.substring(0,d);a=a.substring(c);b=b.substring(d);f=this.diff_main(f,g,!1,e);e=this.diff_main(a,b,!1,e);return f.concat(e)};
+diff_match_patch.prototype.diff_linesToChars_=function(a,b){function c(a){for(var b="",c=0,g=-1,h=d.length;g<a.length-1;){g=a.indexOf("\n",c);-1==g&&(g=a.length-1);var l=a.substring(c,g+1);(e.hasOwnProperty?e.hasOwnProperty(l):void 0!==e[l])?b+=String.fromCharCode(e[l]):(h==f&&(l=a.substring(c),g=a.length),b+=String.fromCharCode(h),e[l]=h,d[h++]=l);c=g+1}return b}var d=[],e={};d[0]="";var f=4E4,g=c(a);f=65535;var h=c(b);return{chars1:g,chars2:h,lineArray:d}};
+diff_match_patch.prototype.diff_charsToLines_=function(a,b){for(var c=0;c<a.length;c++){for(var d=a[c][1],e=[],f=0;f<d.length;f++)e[f]=b[d.charCodeAt(f)];a[c][1]=e.join("")}};diff_match_patch.prototype.diff_commonPrefix=function(a,b){if(!a||!b||a.charAt(0)!=b.charAt(0))return 0;for(var c=0,d=Math.min(a.length,b.length),e=d,f=0;c<e;)a.substring(f,e)==b.substring(f,e)?f=c=e:d=e,e=Math.floor((d-c)/2+c);return e};
+diff_match_patch.prototype.diff_commonSuffix=function(a,b){if(!a||!b||a.charAt(a.length-1)!=b.charAt(b.length-1))return 0;for(var c=0,d=Math.min(a.length,b.length),e=d,f=0;c<e;)a.substring(a.length-e,a.length-f)==b.substring(b.length-e,b.length-f)?f=c=e:d=e,e=Math.floor((d-c)/2+c);return e};
+diff_match_patch.prototype.diff_commonOverlap_=function(a,b){var c=a.length,d=b.length;if(0==c||0==d)return 0;c>d?a=a.substring(c-d):c<d&&(b=b.substring(0,c));c=Math.min(c,d);if(a==b)return c;d=0;for(var e=1;;){var f=a.substring(c-e);f=b.indexOf(f);if(-1==f)return d;e+=f;if(0==f||a.substring(c-e)==b.substring(0,e))d=e,e++}};
+diff_match_patch.prototype.diff_halfMatch_=function(a,b){function c(a,b,c){for(var d=a.substring(c,c+Math.floor(a.length/4)),e=-1,g="",h,k,l,m;-1!=(e=b.indexOf(d,e+1));){var p=f.diff_commonPrefix(a.substring(c),b.substring(e)),u=f.diff_commonSuffix(a.substring(0,c),b.substring(0,e));g.length<u+p&&(g=b.substring(e-u,e)+b.substring(e,e+p),h=a.substring(0,c-u),k=a.substring(c+p),l=b.substring(0,e-u),m=b.substring(e+p))}return 2*g.length>=a.length?[h,k,l,m,g]:null}if(0>=this.Diff_Timeout)return null;
+var d=a.length>b.length?a:b,e=a.length>b.length?b:a;if(4>d.length||2*e.length<d.length)return null;var f=this,g=c(d,e,Math.ceil(d.length/4));d=c(d,e,Math.ceil(d.length/2));if(g||d)g=d?g?g[4].length>d[4].length?g:d:d:g;else return null;if(a.length>b.length){d=g[0];e=g[1];var h=g[2];var l=g[3]}else h=g[0],l=g[1],d=g[2],e=g[3];return[d,e,h,l,g[4]]};
+diff_match_patch.prototype.diff_cleanupSemantic=function(a){for(var b=!1,c=[],d=0,e=null,f=0,g=0,h=0,l=0,k=0;f<a.length;)a[f][0]==DIFF_EQUAL?(c[d++]=f,g=l,h=k,k=l=0,e=a[f][1]):(a[f][0]==DIFF_INSERT?l+=a[f][1].length:k+=a[f][1].length,e&&e.length<=Math.max(g,h)&&e.length<=Math.max(l,k)&&(a.splice(c[d-1],0,new diff_match_patch.Diff(DIFF_DELETE,e)),a[c[d-1]+1][0]=DIFF_INSERT,d--,d--,f=0<d?c[d-1]:-1,k=l=h=g=0,e=null,b=!0)),f++;b&&this.diff_cleanupMerge(a);this.diff_cleanupSemanticLossless(a);for(f=1;f<
+a.length;){if(a[f-1][0]==DIFF_DELETE&&a[f][0]==DIFF_INSERT){b=a[f-1][1];c=a[f][1];d=this.diff_commonOverlap_(b,c);e=this.diff_commonOverlap_(c,b);if(d>=e){if(d>=b.length/2||d>=c.length/2)a.splice(f,0,new diff_match_patch.Diff(DIFF_EQUAL,c.substring(0,d))),a[f-1][1]=b.substring(0,b.length-d),a[f+1][1]=c.substring(d),f++}else if(e>=b.length/2||e>=c.length/2)a.splice(f,0,new diff_match_patch.Diff(DIFF_EQUAL,b.substring(0,e))),a[f-1][0]=DIFF_INSERT,a[f-1][1]=c.substring(0,c.length-e),a[f+1][0]=DIFF_DELETE,
+a[f+1][1]=b.substring(e),f++;f++}f++}};
+diff_match_patch.prototype.diff_cleanupSemanticLossless=function(a){function b(a,b){if(!a||!b)return 6;var c=a.charAt(a.length-1),d=b.charAt(0),e=c.match(diff_match_patch.nonAlphaNumericRegex_),f=d.match(diff_match_patch.nonAlphaNumericRegex_),g=e&&c.match(diff_match_patch.whitespaceRegex_),h=f&&d.match(diff_match_patch.whitespaceRegex_);c=g&&c.match(diff_match_patch.linebreakRegex_);d=h&&d.match(diff_match_patch.linebreakRegex_);var k=c&&a.match(diff_match_patch.blanklineEndRegex_),l=d&&b.match(diff_match_patch.blanklineStartRegex_);
+return k||l?5:c||d?4:e&&!g&&h?3:g||h?2:e||f?1:0}for(var c=1;c<a.length-1;){if(a[c-1][0]==DIFF_EQUAL&&a[c+1][0]==DIFF_EQUAL){var d=a[c-1][1],e=a[c][1],f=a[c+1][1],g=this.diff_commonSuffix(d,e);if(g){var h=e.substring(e.length-g);d=d.substring(0,d.length-g);e=h+e.substring(0,e.length-g);f=h+f}g=d;h=e;for(var l=f,k=b(d,e)+b(e,f);e.charAt(0)===f.charAt(0);){d+=e.charAt(0);e=e.substring(1)+f.charAt(0);f=f.substring(1);var m=b(d,e)+b(e,f);m>=k&&(k=m,g=d,h=e,l=f)}a[c-1][1]!=g&&(g?a[c-1][1]=g:(a.splice(c-
+1,1),c--),a[c][1]=h,l?a[c+1][1]=l:(a.splice(c+1,1),c--))}c++}};diff_match_patch.nonAlphaNumericRegex_=/[^a-zA-Z0-9]/;diff_match_patch.whitespaceRegex_=/\s/;diff_match_patch.linebreakRegex_=/[\r\n]/;diff_match_patch.blanklineEndRegex_=/\n\r?\n$/;diff_match_patch.blanklineStartRegex_=/^\r?\n\r?\n/;
+diff_match_patch.prototype.diff_cleanupEfficiency=function(a){for(var b=!1,c=[],d=0,e=null,f=0,g=!1,h=!1,l=!1,k=!1;f<a.length;)a[f][0]==DIFF_EQUAL?(a[f][1].length<this.Diff_EditCost&&(l||k)?(c[d++]=f,g=l,h=k,e=a[f][1]):(d=0,e=null),l=k=!1):(a[f][0]==DIFF_DELETE?k=!0:l=!0,e&&(g&&h&&l&&k||e.length<this.Diff_EditCost/2&&3==g+h+l+k)&&(a.splice(c[d-1],0,new diff_match_patch.Diff(DIFF_DELETE,e)),a[c[d-1]+1][0]=DIFF_INSERT,d--,e=null,g&&h?(l=k=!0,d=0):(d--,f=0<d?c[d-1]:-1,l=k=!1),b=!0)),f++;b&&this.diff_cleanupMerge(a)};
+diff_match_patch.prototype.diff_cleanupMerge=function(a){a.push(new diff_match_patch.Diff(DIFF_EQUAL,""));for(var b=0,c=0,d=0,e="",f="",g;b<a.length;)switch(a[b][0]){case DIFF_INSERT:d++;f+=a[b][1];b++;break;case DIFF_DELETE:c++;e+=a[b][1];b++;break;case DIFF_EQUAL:1<c+d?(0!==c&&0!==d&&(g=this.diff_commonPrefix(f,e),0!==g&&(0<b-c-d&&a[b-c-d-1][0]==DIFF_EQUAL?a[b-c-d-1][1]+=f.substring(0,g):(a.splice(0,0,new diff_match_patch.Diff(DIFF_EQUAL,f.substring(0,g))),b++),f=f.substring(g),e=e.substring(g)),
+g=this.diff_commonSuffix(f,e),0!==g&&(a[b][1]=f.substring(f.length-g)+a[b][1],f=f.substring(0,f.length-g),e=e.substring(0,e.length-g))),b-=c+d,a.splice(b,c+d),e.length&&(a.splice(b,0,new diff_match_patch.Diff(DIFF_DELETE,e)),b++),f.length&&(a.splice(b,0,new diff_match_patch.Diff(DIFF_INSERT,f)),b++),b++):0!==b&&a[b-1][0]==DIFF_EQUAL?(a[b-1][1]+=a[b][1],a.splice(b,1)):b++,c=d=0,f=e=""}""===a[a.length-1][1]&&a.pop();c=!1;for(b=1;b<a.length-1;)a[b-1][0]==DIFF_EQUAL&&a[b+1][0]==DIFF_EQUAL&&(a[b][1].substring(a[b][1].length-
+a[b-1][1].length)==a[b-1][1]?(a[b][1]=a[b-1][1]+a[b][1].substring(0,a[b][1].length-a[b-1][1].length),a[b+1][1]=a[b-1][1]+a[b+1][1],a.splice(b-1,1),c=!0):a[b][1].substring(0,a[b+1][1].length)==a[b+1][1]&&(a[b-1][1]+=a[b+1][1],a[b][1]=a[b][1].substring(a[b+1][1].length)+a[b+1][1],a.splice(b+1,1),c=!0)),b++;c&&this.diff_cleanupMerge(a)};
+diff_match_patch.prototype.diff_xIndex=function(a,b){var c=0,d=0,e=0,f=0,g;for(g=0;g<a.length;g++){a[g][0]!==DIFF_INSERT&&(c+=a[g][1].length);a[g][0]!==DIFF_DELETE&&(d+=a[g][1].length);if(c>b)break;e=c;f=d}return a.length!=g&&a[g][0]===DIFF_DELETE?f:f+(b-e)};
+diff_match_patch.prototype.diff_prettyHtml=function(a){for(var b=[],c=/&/g,d=/</g,e=/>/g,f=/\n/g,g=0;g<a.length;g++){var h=a[g][0],l=a[g][1].replace(c,"&amp;").replace(d,"&lt;").replace(e,"&gt;").replace(f,"&para;<br>");switch(h){case DIFF_INSERT:b[g]='<ins style="background:#e6ffe6;">'+l+"</ins>";break;case DIFF_DELETE:b[g]='<del style="background:#ffe6e6;">'+l+"</del>";break;case DIFF_EQUAL:b[g]="<span>"+l+"</span>"}}return b.join("")};
+diff_match_patch.prototype.diff_text1=function(a){for(var b=[],c=0;c<a.length;c++)a[c][0]!==DIFF_INSERT&&(b[c]=a[c][1]);return b.join("")};diff_match_patch.prototype.diff_text2=function(a){for(var b=[],c=0;c<a.length;c++)a[c][0]!==DIFF_DELETE&&(b[c]=a[c][1]);return b.join("")};
+diff_match_patch.prototype.diff_levenshtein=function(a){for(var b=0,c=0,d=0,e=0;e<a.length;e++){var f=a[e][1];switch(a[e][0]){case DIFF_INSERT:c+=f.length;break;case DIFF_DELETE:d+=f.length;break;case DIFF_EQUAL:b+=Math.max(c,d),d=c=0}}return b+=Math.max(c,d)};
+diff_match_patch.prototype.diff_toDelta=function(a){for(var b=[],c=0;c<a.length;c++)switch(a[c][0]){case DIFF_INSERT:b[c]="+"+encodeURI(a[c][1]);break;case DIFF_DELETE:b[c]="-"+a[c][1].length;break;case DIFF_EQUAL:b[c]="="+a[c][1].length}return b.join("\t").replace(/%20/g," ")};
+diff_match_patch.prototype.diff_fromDelta=function(a,b){for(var c=[],d=0,e=0,f=b.split(/\t/g),g=0;g<f.length;g++){var h=f[g].substring(1);switch(f[g].charAt(0)){case "+":try{c[d++]=new diff_match_patch.Diff(DIFF_INSERT,decodeURI(h))}catch(k){throw Error("Illegal escape in diff_fromDelta: "+h);}break;case "-":case "=":var l=parseInt(h,10);if(isNaN(l)||0>l)throw Error("Invalid number in diff_fromDelta: "+h);h=a.substring(e,e+=l);"="==f[g].charAt(0)?c[d++]=new diff_match_patch.Diff(DIFF_EQUAL,h):c[d++]=
+new diff_match_patch.Diff(DIFF_DELETE,h);break;default:if(f[g])throw Error("Invalid diff operation in diff_fromDelta: "+f[g]);}}if(e!=a.length)throw Error("Delta length ("+e+") does not equal source text length ("+a.length+").");return c};diff_match_patch.prototype.match_main=function(a,b,c){if(null==a||null==b||null==c)throw Error("Null input. (match_main)");c=Math.max(0,Math.min(c,a.length));return a==b?0:a.length?a.substring(c,c+b.length)==b?c:this.match_bitap_(a,b,c):-1};
+diff_match_patch.prototype.match_bitap_=function(a,b,c){function d(a,d){var e=a/b.length,g=Math.abs(c-d);return f.Match_Distance?e+g/f.Match_Distance:g?1:e}if(b.length>this.Match_MaxBits)throw Error("Pattern too long for this browser.");var e=this.match_alphabet_(b),f=this,g=this.Match_Threshold,h=a.indexOf(b,c);-1!=h&&(g=Math.min(d(0,h),g),h=a.lastIndexOf(b,c+b.length),-1!=h&&(g=Math.min(d(0,h),g)));var l=1<<b.length-1;h=-1;for(var k,m,p=b.length+a.length,x,w=0;w<b.length;w++){k=0;for(m=p;k<m;)d(w,
+c+m)<=g?k=m:p=m,m=Math.floor((p-k)/2+k);p=m;k=Math.max(1,c-m+1);var q=Math.min(c+m,a.length)+b.length;m=Array(q+2);for(m[q+1]=(1<<w)-1;q>=k;q--){var t=e[a.charAt(q-1)];m[q]=0===w?(m[q+1]<<1|1)&t:(m[q+1]<<1|1)&t|(x[q+1]|x[q])<<1|1|x[q+1];if(m[q]&l&&(t=d(w,q-1),t<=g))if(g=t,h=q-1,h>c)k=Math.max(1,2*c-h);else break}if(d(w+1,c)>g)break;x=m}return h};
+diff_match_patch.prototype.match_alphabet_=function(a){for(var b={},c=0;c<a.length;c++)b[a.charAt(c)]=0;for(c=0;c<a.length;c++)b[a.charAt(c)]|=1<<a.length-c-1;return b};
+diff_match_patch.prototype.patch_addContext_=function(a,b){if(0!=b.length){if(null===a.start2)throw Error("patch not initialized");for(var c=b.substring(a.start2,a.start2+a.length1),d=0;b.indexOf(c)!=b.lastIndexOf(c)&&c.length<this.Match_MaxBits-this.Patch_Margin-this.Patch_Margin;)d+=this.Patch_Margin,c=b.substring(a.start2-d,a.start2+a.length1+d);d+=this.Patch_Margin;(c=b.substring(a.start2-d,a.start2))&&a.diffs.unshift(new diff_match_patch.Diff(DIFF_EQUAL,c));(d=b.substring(a.start2+a.length1,
+a.start2+a.length1+d))&&a.diffs.push(new diff_match_patch.Diff(DIFF_EQUAL,d));a.start1-=c.length;a.start2-=c.length;a.length1+=c.length+d.length;a.length2+=c.length+d.length}};
+diff_match_patch.prototype.patch_make=function(a,b,c){if("string"==typeof a&&"string"==typeof b&&"undefined"==typeof c){var d=a;b=this.diff_main(d,b,!0);2<b.length&&(this.diff_cleanupSemantic(b),this.diff_cleanupEfficiency(b))}else if(a&&"object"==typeof a&&"undefined"==typeof b&&"undefined"==typeof c)b=a,d=this.diff_text1(b);else if("string"==typeof a&&b&&"object"==typeof b&&"undefined"==typeof c)d=a;else if("string"==typeof a&&"string"==typeof b&&c&&"object"==typeof c)d=a,b=c;else throw Error("Unknown call format to patch_make.");
+if(0===b.length)return[];c=[];a=new diff_match_patch.patch_obj;for(var e=0,f=0,g=0,h=d,l=0;l<b.length;l++){var k=b[l][0],m=b[l][1];e||k===DIFF_EQUAL||(a.start1=f,a.start2=g);switch(k){case DIFF_INSERT:a.diffs[e++]=b[l];a.length2+=m.length;d=d.substring(0,g)+m+d.substring(g);break;case DIFF_DELETE:a.length1+=m.length;a.diffs[e++]=b[l];d=d.substring(0,g)+d.substring(g+m.length);break;case DIFF_EQUAL:m.length<=2*this.Patch_Margin&&e&&b.length!=l+1?(a.diffs[e++]=b[l],a.length1+=m.length,a.length2+=m.length):
+m.length>=2*this.Patch_Margin&&e&&(this.patch_addContext_(a,h),c.push(a),a=new diff_match_patch.patch_obj,e=0,h=d,f=g)}k!==DIFF_INSERT&&(f+=m.length);k!==DIFF_DELETE&&(g+=m.length)}e&&(this.patch_addContext_(a,h),c.push(a));return c};
+diff_match_patch.prototype.patch_deepCopy=function(a){for(var b=[],c=0;c<a.length;c++){var d=a[c],e=new diff_match_patch.patch_obj;e.diffs=[];for(var f=0;f<d.diffs.length;f++)e.diffs[f]=new diff_match_patch.Diff(d.diffs[f][0],d.diffs[f][1]);e.start1=d.start1;e.start2=d.start2;e.length1=d.length1;e.length2=d.length2;b[c]=e}return b};
+diff_match_patch.prototype.patch_apply=function(a,b){if(0==a.length)return[b,[]];a=this.patch_deepCopy(a);var c=this.patch_addPadding(a);b=c+b+c;this.patch_splitMax(a);for(var d=0,e=[],f=0;f<a.length;f++){var g=a[f].start2+d,h=this.diff_text1(a[f].diffs),l=-1;if(h.length>this.Match_MaxBits){var k=this.match_main(b,h.substring(0,this.Match_MaxBits),g);-1!=k&&(l=this.match_main(b,h.substring(h.length-this.Match_MaxBits),g+h.length-this.Match_MaxBits),-1==l||k>=l)&&(k=-1)}else k=this.match_main(b,h,
+g);if(-1==k)e[f]=!1,d-=a[f].length2-a[f].length1;else if(e[f]=!0,d=k-g,g=-1==l?b.substring(k,k+h.length):b.substring(k,l+this.Match_MaxBits),h==g)b=b.substring(0,k)+this.diff_text2(a[f].diffs)+b.substring(k+h.length);else if(g=this.diff_main(h,g,!1),h.length>this.Match_MaxBits&&this.diff_levenshtein(g)/h.length>this.Patch_DeleteThreshold)e[f]=!1;else{this.diff_cleanupSemanticLossless(g);h=0;var m;for(l=0;l<a[f].diffs.length;l++){var p=a[f].diffs[l];p[0]!==DIFF_EQUAL&&(m=this.diff_xIndex(g,h));p[0]===
+DIFF_INSERT?b=b.substring(0,k+m)+p[1]+b.substring(k+m):p[0]===DIFF_DELETE&&(b=b.substring(0,k+m)+b.substring(k+this.diff_xIndex(g,h+p[1].length)));p[0]!==DIFF_DELETE&&(h+=p[1].length)}}}b=b.substring(c.length,b.length-c.length);return[b,e]};
+diff_match_patch.prototype.patch_addPadding=function(a){for(var b=this.Patch_Margin,c="",d=1;d<=b;d++)c+=String.fromCharCode(d);for(d=0;d<a.length;d++)a[d].start1+=b,a[d].start2+=b;d=a[0];var e=d.diffs;if(0==e.length||e[0][0]!=DIFF_EQUAL)e.unshift(new diff_match_patch.Diff(DIFF_EQUAL,c)),d.start1-=b,d.start2-=b,d.length1+=b,d.length2+=b;else if(b>e[0][1].length){var f=b-e[0][1].length;e[0][1]=c.substring(e[0][1].length)+e[0][1];d.start1-=f;d.start2-=f;d.length1+=f;d.length2+=f}d=a[a.length-1];e=d.diffs;
+0==e.length||e[e.length-1][0]!=DIFF_EQUAL?(e.push(new diff_match_patch.Diff(DIFF_EQUAL,c)),d.length1+=b,d.length2+=b):b>e[e.length-1][1].length&&(f=b-e[e.length-1][1].length,e[e.length-1][1]+=c.substring(0,f),d.length1+=f,d.length2+=f);return c};
+diff_match_patch.prototype.patch_splitMax=function(a){for(var b=this.Match_MaxBits,c=0;c<a.length;c++)if(!(a[c].length1<=b)){var d=a[c];a.splice(c--,1);for(var e=d.start1,f=d.start2,g="";0!==d.diffs.length;){var h=new diff_match_patch.patch_obj,l=!0;h.start1=e-g.length;h.start2=f-g.length;""!==g&&(h.length1=h.length2=g.length,h.diffs.push(new diff_match_patch.Diff(DIFF_EQUAL,g)));for(;0!==d.diffs.length&&h.length1<b-this.Patch_Margin;){g=d.diffs[0][0];var k=d.diffs[0][1];g===DIFF_INSERT?(h.length2+=
+k.length,f+=k.length,h.diffs.push(d.diffs.shift()),l=!1):g===DIFF_DELETE&&1==h.diffs.length&&h.diffs[0][0]==DIFF_EQUAL&&k.length>2*b?(h.length1+=k.length,e+=k.length,l=!1,h.diffs.push(new diff_match_patch.Diff(g,k)),d.diffs.shift()):(k=k.substring(0,b-h.length1-this.Patch_Margin),h.length1+=k.length,e+=k.length,g===DIFF_EQUAL?(h.length2+=k.length,f+=k.length):l=!1,h.diffs.push(new diff_match_patch.Diff(g,k)),k==d.diffs[0][1]?d.diffs.shift():d.diffs[0][1]=d.diffs[0][1].substring(k.length))}g=this.diff_text2(h.diffs);
+g=g.substring(g.length-this.Patch_Margin);k=this.diff_text1(d.diffs).substring(0,this.Patch_Margin);""!==k&&(h.length1+=k.length,h.length2+=k.length,0!==h.diffs.length&&h.diffs[h.diffs.length-1][0]===DIFF_EQUAL?h.diffs[h.diffs.length-1][1]+=k:h.diffs.push(new diff_match_patch.Diff(DIFF_EQUAL,k)));l||a.splice(++c,0,h)}}};diff_match_patch.prototype.patch_toText=function(a){for(var b=[],c=0;c<a.length;c++)b[c]=a[c];return b.join("")};
+diff_match_patch.prototype.patch_fromText=function(a){var b=[];if(!a)return b;a=a.split("\n");for(var c=0,d=/^@@ -(\d+),?(\d*) \+(\d+),?(\d*) @@$/;c<a.length;){var e=a[c].match(d);if(!e)throw Error("Invalid patch string: "+a[c]);var f=new diff_match_patch.patch_obj;b.push(f);f.start1=parseInt(e[1],10);""===e[2]?(f.start1--,f.length1=1):"0"==e[2]?f.length1=0:(f.start1--,f.length1=parseInt(e[2],10));f.start2=parseInt(e[3],10);""===e[4]?(f.start2--,f.length2=1):"0"==e[4]?f.length2=0:(f.start2--,f.length2=
+parseInt(e[4],10));for(c++;c<a.length;){e=a[c].charAt(0);try{var g=decodeURI(a[c].substring(1))}catch(h){throw Error("Illegal escape in patch_fromText: "+g);}if("-"==e)f.diffs.push(new diff_match_patch.Diff(DIFF_DELETE,g));else if("+"==e)f.diffs.push(new diff_match_patch.Diff(DIFF_INSERT,g));else if(" "==e)f.diffs.push(new diff_match_patch.Diff(DIFF_EQUAL,g));else if("@"==e)break;else if(""!==e)throw Error('Invalid patch mode "'+e+'" in: '+g);c++}}return b};
+diff_match_patch.patch_obj=function(){this.diffs=[];this.start2=this.start1=null;this.length2=this.length1=0};
+diff_match_patch.patch_obj.prototype.toString=function(){for(var a=["@@ -"+(0===this.length1?this.start1+",0":1==this.length1?this.start1+1:this.start1+1+","+this.length1)+" +"+(0===this.length2?this.start2+",0":1==this.length2?this.start2+1:this.start2+1+","+this.length2)+" @@\n"],b,c=0;c<this.diffs.length;c++){switch(this.diffs[c][0]){case DIFF_INSERT:b="+";break;case DIFF_DELETE:b="-";break;case DIFF_EQUAL:b=" "}a[c+1]=b+encodeURI(this.diffs[c][1])+"\n"}return a.join("").replace(/%20/g," ")};
+this.diff_match_patch=diff_match_patch;this.DIFF_DELETE=DIFF_DELETE;this.DIFF_INSERT=DIFF_INSERT;this.DIFF_EQUAL=DIFF_EQUAL;
+</script><script>(function (root) {
+  'use strict';
+  const C=root.SubtitleCore;
+  const Diff=typeof module!=='undefined'?require('./vendor/diff-match-patch.js').diff_match_patch:root.diff_match_patch;
+  const key=text=>text.normalize('NFKC').toLowerCase().normalize('NFD').replace(/[^\p{L}\p{N}]/gu,'');
+  function manuscript(text) {
+    if(typeof text!=='string'||text.length>12000)throw new Error('原稿最多 12000 个字符，请按视频片段拆分');
+    if(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\ufffd]/.test(text))throw new Error('原稿含乱码或非文本内容，请使用 TXT 或直接粘贴文字');
+    const value=text.replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n').replace(/[\t ]+/g,' ').trim();
+    if(!value||!key(value))throw new Error('请添加实际说出的原稿文字');
+    return value;
+  }
+  function decode(bytes) {
+    if(bytes.byteLength>128*1024)throw new Error('TXT 文件需小于 128 KB');
+    const b=new Uint8Array(bytes);
+    if(b[0]===255&&b[1]===254)return manuscript(new TextDecoder('utf-16le',{fatal:true}).decode(b));
+    if(b[0]===254&&b[1]===255)return manuscript(new TextDecoder('utf-16be',{fatal:true}).decode(b));
+    try{return manuscript(new TextDecoder('utf-8',{fatal:true}).decode(b));}
+    catch(e){if(e instanceof TypeError)return manuscript(new TextDecoder('gb18030',{fatal:true}).decode(b));throw e;}
+  }
+  function allocate(targets,slots,timing) {
+    const length=slots.reduce((sum,u)=>sum+u.end-u.start,0);
+    if(!length)throw new Error('没有足够的语音时间，请重新识别');
+    // Distribute only over speech intervals, not the silent gaps between them.
+    const at=(distance,end)=>{let remaining=distance;for(const u of slots){const span=u.end-u.start;if(remaining<span||(end&&remaining<=span))return u.start+remaining;remaining-=span;}return slots.at(-1).end;};
+    targets.forEach((index,i)=>{timing[index]={...timing[index],start:at(length*i/targets.length,false),end:at(length*(i+1)/targets.length,true)};});
+  }
+  function align(text,raw,duration,limit=22) {
+    text=manuscript(text);
+    if(!Number.isFinite(duration)||duration<=0||!Array.isArray(raw)||raw.length>20000)throw new Error('请先生成可用的语音时间轴');
+    const speech=raw.filter(u=>typeof u.text==='string'&&Number.isFinite(u.start)&&Number.isFinite(u.end)&&u.end>u.start&&u.start>=0&&u.end<=duration).sort((a,b)=>a.start-b.start);
+    const ref=speech.map(u=>({...u,key:key(u.text)})).filter(u=>u.key);
+    const chars=C.graphemes(text),target=chars.map((text,index)=>({text,index,key:key(text)})).filter(u=>u.key);
+    if(!ref.length)throw new Error('没有可用的语音时间轴，请先生成字幕');
+    const dictionary=new Map();
+    const encode=list=>list.map(u=>{if(!dictionary.has(u.key))dictionary.set(u.key,String.fromCharCode(256+dictionary.size));return dictionary.get(u.key);}).join('');
+    const a=encode(ref),b=encode(target),diff=new Diff();diff.Diff_Timeout=.7;
+    const operations=diff.diff_main(a,b,false),timing=new Array(target.length),blocks=[];
+    let ai=0,bi=0,anchors=0,block=null;
+    for(const entry of operations){
+      const operation=entry[0],value=entry[1];
+      if(operation===0){if(block){blocks.push(block);block=null;}for(let i=0;i<value.length;i++){timing[bi]={start:ref[ai].start,end:ref[ai].end,ref:ai,alignment:'anchor'};ai++;bi++;anchors++;}}
+      else{if(!block)block={a:ai,b:bi,deleted:0,inserted:0};if(operation===-1){block.deleted+=value.length;ai+=value.length;}else{block.inserted+=value.length;bi+=value.length;}}
+    }
+    if(block)blocks.push(block);
+    const coverage=anchors/target.length,similarity=2*anchors/(ref.length+target.length);
+    const latin=target.filter(u=>/^[a-z0-9]+$/.test(u.key)).length/target.length>.65;
+    if(anchors<Math.min(3,target.length)||coverage<(latin ? .65 : .45)||similarity<(latin ? .45 : .35))throw new Error('原稿与语音差异较大，暂不匹配。请删去标题、备注、未读出的内容，或重新识别；当前字幕未被替换');
+    for(const part of blocks){
+      if(!part.inserted)continue;
+      const indices=Array.from({length:part.inserted},(_,i)=>part.b+i);
+      const unsupported=!part.deleted||part.inserted>=12||part.inserted>part.deleted*2+3;
+      for(const index of indices)timing[index]={alignment:unsupported?'unmatched':'estimated'};
+      let slots=ref.slice(part.a,part.a+part.deleted);
+      if(!slots.length){
+        const left=part.b-1,right=part.b+part.inserted;
+        if(left>=0&&timing[left]?.ref!==undefined){indices.unshift(left);slots.push(ref[timing[left].ref]);}
+        if(right<target.length&&timing[right]?.ref!==undefined){indices.push(right);slots.push(ref[timing[right].ref]);}
+      }
+      allocate(indices,slots,timing);
+    }
+    const units=new Array(chars.length);let previous=0;
+    target.forEach((u,i)=>{const t=timing[i];const start=C.clamp(Math.max(previous,t.start),0,duration),end=C.clamp(Math.max(start,t.end),start,duration);units[u.index]={text:u.text,start,end,alignment:t.alignment};previous=end;});
+    let last=null;
+    for(let i=0;i<chars.length;i++){if(units[i]){last=units[i];continue;}const next=target.find(u=>u.index>i),position=last?last.end:units[next?.index]?.start||0;units[i]={text:chars[i],start:position,end:position};}
+    const cues=C.group(units,limit,duration);
+    for(const cue of cues){cue.review=cue.units.some(u=>u.alignment==='estimated'||u.alignment==='unmatched');}
+    if(!cues.length)throw new Error('匹配结果没有可用的时间，请重新识别');
+    return {text,cues,coverage,anchors,total:target.length,estimated:timing.filter(u=>u.alignment==='estimated').length,unmatched:timing.filter(u=>u.alignment==='unmatched').length,omitted:ref.length-anchors,review:cues.filter(c=>c.review).length};
+  }
+  const api={align,manuscript,decode};root.SubtitleAlignment=api;if(typeof module!=='undefined')module.exports=api;
 })(typeof globalThis==='undefined'?this:globalThis);
 </script><script>(function(root){
   'use strict';
@@ -180,15 +513,16 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
 })(globalThis);
 </script><script>(() => {
   'use strict';
-  const C=SubtitleCore,R=SubtitleRenderer,$=id=>document.getElementById(id);
+  const C=SubtitleCore,R=SubtitleRenderer,A=SubtitleAlignment,$=id=>document.getElementById(id);
   const player=$('player'),canvas=$('preview'),ctx=canvas.getContext('2d');
   let source=null,sourceUrl=null,cues=[],style={...C.defaults},history=[],worker=null,workerUrl=null,busy=false,epoch=0,resultUrl=null,exportCancel=null,asrCancel=null,activeIndex=-1,drawFrame=0;
+  let speechUnits=[],matchDraft=null;
   const clone=x=>JSON.parse(JSON.stringify(x));
   const icons=()=>{if(window.lucide)lucide.createIcons();};
   const time=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s)%60).padStart(2,'0')}`;
   function status(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error);}
   function updateControls(){
-    for(const id of ['demo','recognize','add-cue','regroup','export-video','srt','vtt','save-project','load-sub','undo']){
+    for(const id of ['demo','recognize','add-cue','regroup','export-video','srt','vtt','save-project','load-sub','undo','load-script','clear-script','review-next']){
       const needsVideo=['recognize','add-cue','export-video','save-project'].includes(id);
       const needsCues=['regroup','srt','vtt','export-video'].includes(id);
       $(id).disabled=busy||(needsVideo&&!source)||(needsCues&&!cues.length)||(id==='undo'&&!history.length);
@@ -196,10 +530,12 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
     $('video-file').disabled=busy;$('choose').disabled=busy;$('cancel').hidden=!busy;
     $('line-limit').disabled=busy;$('apply-offset').disabled=busy;
     for(const el of document.querySelectorAll('.style-panel input,.style-panel select,.style-panel button,.cue input,.cue textarea,.cue button'))el.disabled=busy;
-    for(const id of ['device','language','resolution','offset'])$(id).disabled=busy;
+    for(const id of ['device','language','resolution','offset','manuscript','script-file','auto'])$(id).disabled=busy;
+    $('match-script').disabled=busy||!source||!$('manuscript').value.trim();$('apply-match').disabled=busy||!matchDraft;$('discard-match').disabled=busy;
   }
   function invalidate(){if(resultUrl){URL.revokeObjectURL(resultUrl);resultUrl=null;}$('download-video').hidden=true;}
-  function remember(){history.push(clone(cues));if(history.length>40)history.shift();invalidate();}
+  function clearMatch(){matchDraft=null;$('match-preview').hidden=true;$('match-list').replaceChildren();}
+  function remember(){history.push(clone(cues));if(history.length>40)history.shift();invalidate();clearMatch();}
   function render(){
     if(source&&player.readyState>=2){ctx.drawImage(player,0,0,canvas.width,canvas.height);R.draw(ctx,canvas.width,canvas.height,C.active(cues,player.currentTime),player.currentTime,style);}
     $('scrub').value=String(player.currentTime||0);$('time').textContent=`${time(player.currentTime||0)} / ${time(player.duration||0)}`;
@@ -226,12 +562,12 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
       if(!Number.isFinite(player.duration)||player.duration<=0||player.duration>300)throw new Error('目前支持 5 分钟以内的视频，请先剪成片段');
       if(!player.videoWidth||!player.videoHeight)throw new Error('视频没有可读取的画面');
       source=file;sourceUrl=url;if(oldUrl)URL.revokeObjectURL(oldUrl);
-      cues=[];history=[];invalidate();const d=C.dimensions(player.videoWidth,player.videoHeight,1280);canvas.width=d.width;canvas.height=d.height;
+      cues=[];history=[];speechUnits=[];clearMatch();invalidate();const d=C.dimensions(player.videoWidth,player.videoHeight,1280);canvas.width=d.width;canvas.height=d.height;
       $('drop').classList.remove('empty');$('filename').textContent=file.name;$('dimensions').textContent=`${player.videoWidth} × ${player.videoHeight}`;
       $('scrub').max=String(player.duration);for(const id of ['play','scrub','mute'])$(id).disabled=false;
       renderCues();status('视频已就绪');busy=false;updateControls();
       if(auto&&$('auto').checked)await recognize();
-    } catch(e){URL.revokeObjectURL(url);source=null;sourceUrl=null;if(oldUrl)URL.revokeObjectURL(oldUrl);player.removeAttribute('src');player.load();$('drop').classList.add('empty');for(const id of ['play','scrub','mute'])$(id).disabled=true;cues=[];history=[];renderCues();status(e.message,true);}
+    } catch(e){URL.revokeObjectURL(url);source=null;sourceUrl=null;if(oldUrl)URL.revokeObjectURL(oldUrl);player.removeAttribute('src');player.load();$('drop').classList.add('empty');for(const id of ['play','scrub','mute'])$(id).disabled=true;cues=[];history=[];speechUnits=[];clearMatch();renderCues();status(e.message,true);}
     finally{if(token===epoch){busy=false;updateControls();}}
   }
   $('video-file').onchange=e=>{const f=e.target.files[0];e.target.value='';importVideo(f);};$('choose').onclick=()=>$('video-file').click();
@@ -246,7 +582,7 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
     finally{await audioCtx.close();}
   }
   function stopWorker(){if(worker)worker.terminate();worker=null;if(workerUrl)URL.revokeObjectURL(workerUrl);workerUrl=null;}
-  async function recognize(){
+  async function recognize(forAlignment=false){
     if(!source||busy)return;
     const token=++epoch;busy=true;player.pause();updateControls();status('提取声音…');$('progress').hidden=false;$('progress').removeAttribute('value');
     try{
@@ -264,30 +600,61 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
       if(token!==epoch)return;
       const units=C.unitsFromChunks(result.result.chunks||[],player.duration);const next=C.group(units,Number($('line-limit').value),player.duration);
       if(!next.length)throw new Error('没有识别出有效字幕，请确认有人声，或导入现有字幕');
-      remember();cues=next;renderCues();status(`已生成 ${cues.length} 句字幕 · ${result.device==='webgpu'?'GPU':'CPU'} · 请校对人名、口音与标点`);$('accuracy').textContent='基于 Whisper 词级时间戳；词内汉字按时间均分。手动改字后，该句逐字时间会重新均分';
+      speechUnits=clone(units);
+      if(!forAlignment){remember();cues=next;renderCues();status(`已生成 ${cues.length} 句字幕 · ${result.device==='webgpu'?'GPU':'CPU'} · 请校对人名、口音与标点`);$('accuracy').textContent='基于 Whisper 词级时间戳；词内汉字按时间均分。手动改字后，该句逐字时间会重新均分';}
+      return true;
     }catch(e){if(token===epoch){stopWorker();status(`识别未完成：${e.message}`,true);}}
     finally{asrCancel=null;if(token===epoch){busy=false;$('progress').hidden=true;updateControls();render();}}
   }
-  $('recognize').onclick=recognize;
+  $('recognize').onclick=()=>recognize();
   $('cancel').onclick=()=>{epoch++;stopWorker();if(exportCancel){exportCancel();status('正在结束录制…');return;}if(asrCancel)asrCancel();busy=false;$('progress').hidden=true;status('已取消，当前字幕保留');updateControls();};
   function renderCues(){
     const list=$('cue-list');list.replaceChildren();activeIndex=-1;$('cue-count').textContent=String(cues.length);
+    const reviews=cues.filter(c=>c.review).length;$('review-count').hidden=!reviews;$('review-count').textContent=`${reviews} 句待校对 · 部分原稿文字的时间由附近语音估算`;$('review-next').hidden=!reviews;
     if(!cues.length){list.innerHTML='<div class="empty-list"><i data-lucide="captions"></i><p>还没有字幕</p></div>';icons();updateControls();return;}
     cues.forEach((cue,index)=>{
       const el=document.createElement('article');el.className='cue';el.dataset.index=index;
       el.innerHTML='<div class="cue-head"><span class="number"></span><input class="start" type="number" step="0.01" min="0"><span>—</span><input class="end" type="number" step="0.01" min="0"><button class="icon seek" title="播放这句"><i data-lucide="play"></i></button><button class="icon remove" title="删除这句"><i data-lucide="trash-2"></i></button></div><textarea maxlength="300" rows="2"></textarea>';
       el.querySelector('.number').textContent=String(index+1).padStart(2,'0');
+      if(cue.review){el.classList.add('needs-review');const row=document.createElement('div');row.className='cue-review';const badge=document.createElement('span');badge.className='review-tag';badge.textContent=cue.units.some(u=>u.alignment==='unmatched')?'待校对 · 含未可靠定位文字':'待校对 · 时间近似';const confirm=document.createElement('button');confirm.className='icon';confirm.title=`确认第 ${index+1} 句`;confirm.setAttribute('aria-label',confirm.title);confirm.innerHTML='<i data-lucide="check"></i>';confirm.onclick=()=>{remember();cues[index].review=false;cues[index].units.forEach(u=>delete u.alignment);renderCues();render();};row.append(badge,confirm);el.append(row);}
       const start=el.querySelector('.start'),end=el.querySelector('.end'),text=el.querySelector('textarea');start.value=cue.start.toFixed(2);end.value=cue.end.toFixed(2);start.setAttribute('aria-label',`第 ${index+1} 句开始秒数`);end.setAttribute('aria-label',`第 ${index+1} 句结束秒数`);text.value=cue.text;text.setAttribute('aria-label',`第 ${index+1} 句字幕`);
       for(const input of [start,end])input.onchange=()=>{const a=Number(start.value),b=Number(end.value);if(!Number.isFinite(a)||!Number.isFinite(b)||a<0||b<=a||b>player.duration){start.value=cue.start.toFixed(2);end.value=cue.end.toFixed(2);return status('起止时间无效：需要 0 ≤ 开始 < 结束 ≤ 视频时长',true);}remember();const prev=cues[index],scale=(b-a)/(prev.end-prev.start);cues[index]={...prev,start:a,end:b,units:prev.units.map(u=>({...u,start:a+(u.start-prev.start)*scale,end:a+(u.end-prev.start)*scale}))};renderCues();render();};
-      text.onchange=()=>{remember();cues[index]=C.retime(cues[index],text.value);updateControls();render();};
+      text.onchange=()=>{remember();cues[index]={...C.retime(cues[index],text.value),review:cue.review===true};if(cues[index].review)cues[index].units.forEach(u=>u.alignment='estimated');renderCues();render();};
       el.querySelector('.seek').setAttribute('aria-label',`播放第 ${index+1} 句`);el.querySelector('.seek').onclick=()=>{player.currentTime=cues[index].start;player.play().catch(e=>status(e.message,true));};
       el.querySelector('.remove').setAttribute('aria-label',`删除第 ${index+1} 句`);el.querySelector('.remove').onclick=()=>{remember();cues.splice(index,1);renderCues();render();};list.append(el);
     });icons();updateControls();render();
   }
-  $('undo').onclick=()=>{if(history.length){cues=history.pop();invalidate();renderCues();render();}};
+  $('undo').onclick=()=>{if(history.length){cues=history.pop();invalidate();clearMatch();renderCues();render();}};
+  $('review-next').onclick=()=>{const index=cues.findIndex(c=>c.review&&c.start>player.currentTime+.01);const next=index>=0?index:cues.findIndex(c=>c.review);if(next<0)return;player.pause();player.currentTime=cues[next].start;const el=document.querySelector(`.cue[data-index="${next}"]`);el?.scrollIntoView({block:'nearest'});el?.querySelector('textarea').focus();};
   $('add-cue').onclick=()=>{if(!source)return;const start=Math.min(player.currentTime,Math.max(0,player.duration-.1));remember();cues.push(C.retime({start,end:Math.min(player.duration,start+2)},'新字幕'));cues.sort((a,b)=>a.start-b.start);renderCues();render();};
   $('apply-offset').onclick=()=>{if(!source||!cues.length)return;remember();cues=C.shift(cues,C.clamp($('offset').value,-60,60),player.duration);$('offset').value='0';renderCues();render();};
-  $('regroup').onclick=()=>{remember();cues=C.group(cues.flatMap(c=>c.units),C.clamp($('line-limit').value,8,60),player.duration);renderCues();render();};
+  $('regroup').onclick=()=>{remember();cues=C.group(cues.flatMap(c=>c.units.map(u=>({...u,alignment:c.review&&u.alignment!=='unmatched'?'estimated':u.alignment}))),C.clamp($('line-limit').value,8,60),player.duration);renderCues();render();};
+  $('line-limit').oninput=()=>{clearMatch();updateControls();};
+  function scriptChanged(){clearMatch();$('script-count').textContent=`${$('manuscript').value.length} / 12000`;updateControls();}
+  $('manuscript').oninput=()=>{$('script-name').textContent='粘贴 / 编辑的原稿';scriptChanged();};
+  $('load-script').onclick=()=>$('script-file').click();
+  $('clear-script').onclick=()=>{$('manuscript').value='';$('script-name').textContent='未导入原稿';scriptChanged();};
+  async function importScript(file){
+    if(busy||!file)return;if(!/\.txt$/i.test(file.name)&&file.type!=='text/plain')return status('原稿支持 TXT；Word / PDF 内容可复制后粘贴',true);
+    if(file.size>128*1024)return status('TXT 文件需小于 128 KB',true);
+    busy=true;updateControls();$('cancel').hidden=true;
+    try{const text=A.decode(await file.arrayBuffer());$('manuscript').value=text;$('script-name').textContent=file.name;scriptChanged();status('原稿已导入，等待匹配语音');}catch(e){status('原稿未导入：'+e.message,true);}finally{busy=false;updateControls();}
+  }
+  $('script-file').onchange=e=>{const f=e.target.files[0];e.target.value='';importScript(f);};
+  for(const ev of ['dragenter','dragover'])$('manuscript-drop').addEventListener(ev,e=>{e.preventDefault();if(!busy)$('manuscript-drop').classList.add('dragging');});
+  for(const ev of ['dragleave','drop'])$('manuscript-drop').addEventListener(ev,e=>{e.preventDefault();$('manuscript-drop').classList.remove('dragging');if(ev==='drop'&&!busy)importScript(e.dataTransfer.files[0]);});
+  $('match-script').onclick=async()=>{
+    if(busy||!source)return;let text;try{text=A.manuscript($('manuscript').value);}catch(e){return status(e.message,true);}
+    clearMatch();if(!speechUnits.length&&!await recognize(true))return;
+    busy=true;player.pause();updateControls();$('cancel').hidden=true;status('匹配原稿与语音时间…');
+    try{await new Promise(resolve=>setTimeout(resolve,0));matchDraft=A.align(text,speechUnits,player.duration,C.clamp($('line-limit').value,8,60));
+      $('match-summary').textContent=`原稿文字锚点 ${Math.round(matchDraft.coverage*100)}% · ${matchDraft.cues.length} 句 · ${matchDraft.review} 句待校对${matchDraft.unmatched?` · ${matchDraft.unmatched} 字未可靠定位`:''}`;
+      for(const cue of matchDraft.cues){const p=document.createElement('p'),stamp=document.createElement('time');stamp.textContent=`${time(cue.start)}–${time(cue.end)}`;p.append(stamp,document.createTextNode(cue.text));if(cue.review){const tag=document.createElement('span');tag.className='review-tag';tag.textContent='待校对';p.append(tag);}$('match-list').append(p);}
+      $('apply-match').innerHTML=`<i data-lucide="check"></i>${matchDraft.review?'应用匹配（含待校对）':'应用匹配'}`;$('match-preview').hidden=false;status('匹配预览已就绪，当前字幕尚未替换');icons();
+    }catch(e){clearMatch();status(e.message,true);}finally{busy=false;updateControls();}
+  };
+  $('discard-match').onclick=()=>{clearMatch();updateControls();status('已放弃匹配预览，当前字幕保留');};
+  $('apply-match').onclick=()=>{if(!matchDraft||busy)return;const draft=matchDraft;remember();cues=clone(draft.cues);renderCues();render();status(`已应用原稿 · ${cues.length} 句 · ${draft.review} 句待校对`);$('accuracy').textContent='文字采用原稿；时间由识别锚点匹配，错字、漏词位置附近插值，非音素级强制对齐。请核对待校对句子的声音与时间';};
   const mapping={'mode':'mode','font':'font','font-size':'size','bold':'bold','color':'color','highlight':'highlight','stroke':'stroke','bg':'bg','outline-color':'outline','bg-color':'bgColor','shadow':'shadow','x':'x','y':'y','width':'width'};
   function syncStyle(){for(const [id,key]of Object.entries(mapping)){if(typeof style[key]==='boolean')$(id).checked=style[key];else $(id).value=style[key];}for(const key of ['x','y','width','bg'])$(key+'-value').textContent=style[key]+'%';$('stroke-value').textContent=style.stroke;document.querySelectorAll('[data-pos]').forEach(b=>{const selected=b.dataset.pos===`${style.x},${style.y}`;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected));});document.querySelectorAll('[data-preset]').forEach(b=>{const selected=Object.keys(C.defaults).filter(k=>!['x','y','width','mode'].includes(k)).every(k=>style[k]===C.presets[b.dataset.preset][k]);b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected));});render();}
   for(const [id,key]of Object.entries(mapping))$(id).oninput=()=>{const el=$(id);style=C.style({...style,[key]:el.type==='checkbox'?el.checked:el.value});invalidate();document.querySelectorAll('[data-preset]').forEach(b=>b.classList.remove('selected'));syncStyle();};
@@ -297,9 +664,9 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
   function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
   const baseName=()=>source?.name.replace(/\.[^.]+$/,'')||'subtitle';
   for(const format of ['srt','vtt'])$(format).onclick=()=>download(new Blob([C.serialize(cues,format)],{type:'text/plain;charset=utf-8'}),baseName()+'.'+format);
-  $('save-project').onclick=()=>download(new Blob([JSON.stringify({format:'world-notebook-subtitles',version:1,videoName:source?.name,duration:player.duration,style,cues},null,2)],{type:'application/json'}),baseName()+'.subtitles.json');
+  $('save-project').onclick=()=>download(new Blob([JSON.stringify({format:'world-notebook-subtitles',version:1,videoName:source?.name,duration:player.duration,style,cues,manuscript:$('manuscript').value},null,2)],{type:'application/json'}),baseName()+'.subtitles.json');
   $('load-sub').onclick=()=>$('sub-file').click();
-  $('sub-file').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;if(!source)return status('请先导入对应视频，再导入字幕或工程',true);if(file.size>2*1024*1024)return status('字幕 / 工程需小于 2 MB',true);try{const data=await file.text();let next,nextStyle;if(/\.json$/i.test(file.name)){const p=JSON.parse(data);if(p.format!=='world-notebook-subtitles'||p.version!==1)throw new Error('不是受支持的字幕工程');next=C.validateCues(p.cues,player.duration);nextStyle=C.style(p.style);}else next=C.parseSub(data,player.duration);remember();cues=next;if(nextStyle)style=nextStyle;renderCues();syncStyle();status(`已导入 ${cues.length} 句字幕，未包含逐字时间的句子按时间均分`);}catch(err){status(err.message,true);}};
+  $('sub-file').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(busy||!file)return;if(!source)return status('请先导入对应视频，再导入字幕或工程',true);if(file.size>2*1024*1024)return status('字幕 / 工程需小于 2 MB',true);const token=epoch;try{const data=await file.text();if(busy||token!==epoch)return;let next,nextStyle,nextScript;if(/\.json$/i.test(file.name)){const p=JSON.parse(data);if(p.format!=='world-notebook-subtitles'||p.version!==1)throw new Error('不是受支持的字幕工程');next=C.validateCues(p.cues,player.duration);nextStyle=C.style(p.style);nextScript=p.manuscript??'';if(typeof nextScript!=='string'||nextScript.length>12000)throw new Error('工程原稿格式不正确');}else next=C.parseSub(data,player.duration);remember();cues=next;if(nextStyle)style=nextStyle;if(nextScript!==undefined){$('manuscript').value=nextScript;$('script-name').textContent=nextScript?'工程中的原稿':'未导入原稿';scriptChanged();}renderCues();syncStyle();status(`已导入 ${cues.length} 句字幕，未包含逐字时间的句子按时间均分`);}catch(err){status(err.message,true);}};
   function recorderType(){if(!window.MediaRecorder)return null;return ['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4'].find(x=>MediaRecorder.isTypeSupported(x))||null;}
   function renderClock(callback,fps=30){
     // A worker clock avoids requestAnimationFrame throttling in an occluded browser window.
