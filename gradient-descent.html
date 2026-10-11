@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="万物手记的第一个交互实验：改变学习率，观察梯度下降，记录自己的发现。">
+<title>一个点怎样走向最低处 · 万物手记</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d3fe0'/%3E%3Cpath d='M8 9l8 16 8-16z' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:light;--ink:#172133;--sub:#536278;--line:#dbe1eb;--blue:#2345db;--blue-soft:#eef2ff;--paper:#fff;--bg:#f4f6fa;--orange:#b54a13;--teal:#007a70;font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.65}button,input,textarea{font:inherit}button{cursor:pointer;min-height:44px;border:1px solid var(--line);background:white;border-radius:8px;padding:9px 15px;color:var(--ink);font-weight:600}button:hover{border-color:var(--blue);background:var(--blue-soft)}button:disabled{opacity:.45;cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #e38d24;outline-offset:3px}button.primary{background:var(--blue);border-color:var(--blue);color:#fff}button.primary:hover{background:#1533b4}a{color:var(--blue)}header{background:var(--paper);border-bottom:1px solid var(--line)}.top{max-width:1220px;margin:auto;padding:17px 28px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:750;letter-spacing:.08em;display:flex;align-items:center;gap:12px}.mark{display:grid;place-items:center;width:33px;height:33px;background:var(--blue);color:white;border-radius:8px;font-family:Georgia,serif;font-size:26px;font-weight:400}.top small{font-size:14px;color:var(--sub)}main{max-width:1220px;margin:auto;padding:25px 28px 50px}.intro{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:22px}.eyebrow{color:var(--blue);font-size:13px;letter-spacing:.1em;font-weight:700}h1{font-size:clamp(25px,3.5vw,34px);line-height:1.35;letter-spacing:-.035em;margin:7px 0 9px}p{margin:0}.intro p{color:var(--sub)}.intro a{white-space:nowrap;font-size:14px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;min-width:0}.chart-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:20px 23px 0}.chart-head strong{font-family:Georgia,serif;font-size:23px}.legend{display:flex;gap:13px;color:var(--sub);font-size:13px;flex-wrap:wrap}.key{display:inline-block;width:9px;height:9px;background:var(--teal);border-radius:50%;margin-right:5px}.key.trail{background:var(--orange);border-radius:0;height:3px;vertical-align:middle}.plot{width:100%;min-width:0;padding:0 8px}svg{display:block;width:100%}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);padding:16px 23px;gap:12px}.metric span{display:block;font-size:13px;color:var(--sub)}.metric output{font-size:23px;font-family:ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.control{padding:22px}h2{font-size:18px;line-height:1.4;margin:0 0 17px}.field{margin-bottom:18px}.field label{display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;font-weight:600}.field input[type=number]{width:100%;border:1px solid #a7b2c4;border-radius:7px;padding:8px 10px;background:white;min-height:44px}.field input[type=range]{width:100%;accent-color:var(--blue);margin:12px 0 0;min-height:25px}.hint{font-size:13px;color:var(--sub)}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}.actions .reset{grid-column:1/-1;background:transparent;font-weight:400}.status{margin-top:18px;padding-top:17px;border-top:1px solid var(--line);font-size:14px;min-height:70px}.status b{display:block;color:var(--blue);margin-bottom:4px}.error{color:#a62823;font-size:14px;margin-top:9px}.guide{margin:25px 0}.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:13px}.section-head h2{margin:0}.section-head span{font-size:13px;color:var(--sub)}.scenarios{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.scenario{text-align:left;padding:17px 19px;font-weight:400;border-radius:12px}.scenario[aria-pressed=true]{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}.scenario strong{font-size:16px;display:block;margin:3px 0 7px}.scenario span{font-size:13px;color:var(--sub);display:block}.scenario .num{color:var(--blue);font-family:ui-monospace,monospace;font-size:13px;font-weight:700}.bottom{display:grid;grid-template-columns:1.15fr 1fr;gap:20px}.notes,.explain{padding:22px}.notes label{font-size:14px;display:block;margin-bottom:8px}textarea{width:100%;min-height:104px;resize:vertical;padding:11px;border:1px solid #a7b2c4;border-radius:8px;background:white;color:var(--ink)}.note-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.note-list{padding:0;list-style:none;margin:16px 0 0}.note-list li{border-top:1px solid var(--line);padding:12px 0}.note-list small{display:block;color:var(--sub);font-size:12px;overflow-wrap:anywhere}.note-list p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;margin-top:4px}.save-status{font-size:13px;color:var(--sub);margin-top:10px}.formula{font-family:ui-monospace,Consolas,monospace;font-size:clamp(16px,2vw,21px);background:var(--blue-soft);padding:15px;border-radius:8px;margin:12px 0;overflow-wrap:anywhere}.explain p{font-size:14px;color:var(--sub)}details{margin-top:15px;font-size:14px}summary{cursor:pointer;font-weight:600;padding:5px 0}details p{margin-top:10px}.explain ul{padding-left:20px;font-size:14px;color:var(--sub)}footer{margin-top:25px;border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:13px;color:var(--sub)}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:850px){.workspace{grid-template-columns:minmax(0,1fr) 280px}.top,main{padding-left:18px;padding-right:18px}.bottom{grid-template-columns:1fr}}
+@media(max-width:680px){.workspace{grid-template-columns:1fr}.intro{display:block}.intro a{display:inline-block;margin-top:10px}.top small{font-size:12px}.control{padding:20px}.scenarios{grid-template-columns:1fr}.scenario{padding:13px 17px}.scenario strong{display:inline;margin-left:10px}.scenario .num{display:inline}.scenario span:last-child{margin-top:5px}.metrics{padding:15px}.metric output{font-size:20px}.section-head{align-items:start;flex-direction:column;gap:5px}.chart-head{padding:16px 16px 0}.legend{font-size:12px}.notes,.explain{padding:18px}}
+@media(prefers-reduced-motion:no-preference){button{transition:background .12s,border-color .12s}}
+</style>
+<style>.top{flex-wrap:wrap}.top>a{font-size:14px}</style>
+</head>
+<body>
+<header><div class="top"><a class="brand" href="index.html" style="text-decoration:none;color:inherit"><span class="mark" aria-hidden="true">∇</span>万物手记</a><a href="electrostatics.html">静电场 · 从零串起来</a><small>实验 001 · 数学 × AI</small></div></header>
+<main>
+<section class="intro"><div><div class="eyebrow">从一个问题开始</div><h1>一个点怎样走向最低处？</h1><p>改变步长，观察结果。先猜一猜，再亲手验证</p></div><a href="#guide">跟着三个例子试一遍 ↓</a></section>
+<div class="workspace">
+<section class="panel" aria-label="函数与实验结果"><div class="chart-head"><strong>f(x) = x²</strong><div class="legend"><span><i class="key"></i>当前位置</span><span><i class="key trail"></i>走过的轨迹</span></div></div><div class="plot" id="plot"><svg id="chart" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title">梯度下降在抛物线上的轨迹</title><desc id="chart-desc">蓝色曲线为函数 x 的平方，橙色连线表示各次迭代，绿色圆点是当前位置</desc></svg></div><div class="metrics"><div class="metric"><span>当前位置 x</span><output id="x-value">2</output></div><div class="metric"><span>函数值 f(x)</span><output id="f-value">4</output></div><div class="metric"><span>已经走了</span><output id="step-value">0 步</output></div></div></section>
+<section class="panel control" aria-label="实验参数"><h2>亲手改变条件</h2><div class="field"><label for="initial">初始位置 x₀ <span class="hint">−5 至 5</span></label><input id="initial" type="number" min="-5" max="5" step="0.1" value="2"></div><div class="field"><label for="rate">学习率 α <span class="hint">0 至 1.2</span></label><input id="rate" type="number" min="0" max="1.2" step="0.01" value="0.1"><input id="rate-slider" type="range" min="0" max="1.2" step="0.01" value="0.1" aria-label="拖动调整学习率"></div><p class="hint">改变参数会从头开始，方便公平比较</p><div class="actions"><button class="primary" id="step" type="button">走一步</button><button id="ten" type="button">走十步</button><button class="reset" id="reset" type="button">↺ 回到起点</button></div><p class="error" id="error" role="alert"></p><div class="status" aria-live="polite" aria-atomic="true"><b id="state-label">先做一个预测</b><span id="state-description">从 2 出发，点「走一步」，看看它会到哪里</span></div></section>
+</div>
+<section id="guide" class="guide"><div class="section-head"><h2>三次小实验，找到步长的秘密</h2><span>点选例子，再点「走十步」</span></div><div class="scenarios"><button class="scenario" data-rate="0.1" type="button" aria-pressed="true"><span class="num">01 / α = 0.1</span><strong>慢慢靠近</strong><span>预测：每一步会比上一步更接近 0 吗？</span></button><button class="scenario" data-rate="0.8" type="button" aria-pressed="false"><span class="num">02 / α = 0.8</span><strong>左右摆动</strong><span>预测：跨过最低点后，还能继续接近吗？</span></button><button class="scenario" data-rate="1.1" type="button" aria-pressed="false"><span class="num">03 / α = 1.1</span><strong>步子太大</strong><span>预测：把步长再增大，会发生什么？</span></button></div></section>
+<div class="bottom"><section class="panel notes"><h2>留下你的第一条发现</h2><label for="observation">我原先以为……实际看到……</label><textarea id="observation" maxlength="3000" placeholder="例如：点越过 0 后，仍然可能越来越接近最低点。"></textarea><div class="note-actions"><button id="save" class="primary" type="button">记下这次观察</button><button id="export" type="button">导出手记 .md</button></div><p id="save-status" class="save-status" aria-live="polite">保存时会附上参数和结果。重要记录请导出备份</p><ul class="note-list" id="note-list" aria-label="已保存的观察"></ul></section>
+<section class="panel explain"><h2>这个实验是怎样算出来的？</h2><p>当前位置的斜率是 2x。沿着斜率的反方向走一点，就是这里的一次更新</p><div class="formula">下一步 x = x − α × 2x</div><p id="calculation">手算第一步：2 − 0.1 × 2 × 2 = 1.6</p><details><summary>展开数学解释与模型边界</summary><p>更新式也可以写成 xₖ₊₁ = (1 − 2α)xₖ。每一步都乘同一个数，所以可以直接判断结果。</p><ul><li>0 &lt; α &lt; 0.5：在同一侧逐渐接近 0</li><li>α = 0.5：一步到达 0</li><li>0.5 &lt; α &lt; 1：在两侧交替接近 0</li><li>α = 1：非零初值在正负两侧持续振荡</li><li>α &gt; 1：非零初值的绝对值越来越大</li><li>α = 0 时不移动；初值为 0 时一直停在最低点</li></ul><p>这些结论针对 f(x)=x²。复杂函数和神经网络的训练有更多条件，不能直接照搬这个学习率范围。轨迹连线表示离散迭代顺序，不是连续运动的物理路径。</p><p>图形会自动调整坐标范围，请结合数字判断距离。最多演示 100 步，坐标绝对值超过 10⁶ 时停止。</p></details></section></div>
+<footer><span>下一次探索：如果最低点不在 0，会发生什么？</span><span>本地实验 · 无需联网 · 记录由你保管</span></footer>
+</main>
+<script>
+'use strict';
+// 先读这里：state 保存实验状态，advance 计算下一步，draw 把数字画出来。
+const $ = id => document.getElementById(id);
+const state = { initial:2, rate:0.1, history:[2], stopped:false };
+const KEY = 'world-notebook-observations-v1';
+let notes = [], storageAvailable = true;
+const fmt = n => Math.abs(n) >= 1e5 || (Math.abs(n) > 0 && Math.abs(n) < 1e-4) ? n.toExponential(3) : Number(n.toFixed(6)).toString();
+function persist() { try { localStorage.setItem(KEY, JSON.stringify(notes)); return true; } catch { storageAvailable = false; return false; } }
+try { const stored = JSON.parse(localStorage.getItem(KEY) || '[]'); if(Array.isArray(stored)) notes = stored.filter(n => n && typeof n.text === 'string' && typeof n.date === 'string' && [n.initial,n.rate,n.steps,n.x].every(Number.isFinite)).slice(-100); } catch { storageAvailable = false; }
+function configure(initial, rate) {
+  if(!Number.isFinite(initial) || initial < -5 || initial > 5 || !Number.isFinite(rate) || rate < 0 || rate > 1.2) throw new Error('初始位置需在 −5 至 5 之间，学习率需在 0 至 1.2 之间');
+  state.initial=initial; state.rate=rate; state.history=[initial]; state.stopped=false;
+  $('initial').value=initial; $('rate').value=rate; $('rate-slider').value=rate;
+  $('error').textContent=''; $('step').disabled=false; $('ten').disabled=false;
+  document.querySelectorAll('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',String(initial===2 && Number(b.dataset.rate)===rate)));
+  update();
+}
+function applyInputs() {
+  try {
+    if($('initial').value.trim()==='' || $('rate').value.trim()==='') throw new Error('请先填入初始位置和学习率');
+    configure(Number($('initial').value),Number($('rate').value)); return true;
+  } catch(e) { $('error').textContent=e.message; $('step').disabled=true; $('ten').disabled=true; return false; }
+}
+function advance(count) {
+  if(!Number.isInteger(count) || count<1 || count>100) throw new Error('步数需为 1 至 100 的整数');
+  if(state.stopped) return snapshot();
+  for(let i=0;i<count;i++) {
+    if(state.history.length>100){state.stopped=true;break;}
+    const x=state.history.at(-1);
+    const next=x-state.rate*2*x; // 数学模型：沿负梯度方向更新位置
+    if(!Number.isFinite(next)||Math.abs(next)>1e6){state.stopped=true;break;}
+    state.history.push(next);
+  }
+  if(state.history.length>100) state.stopped=true;
+  update(); return snapshot();
+}
+function snapshot(){const x=state.history.at(-1);return {initial:state.initial,rate:state.rate,steps:state.history.length-1,x,value:x*x,stopped:state.stopped};}
+function update(){
+  const s=snapshot(); $('x-value').textContent=fmt(s.x);$('f-value').textContent=fmt(s.value);$('step-value').textContent=s.steps+' 步';
+  $('step').disabled=state.stopped;$('ten').disabled=state.stopped;
+  let title='先做一个预测', desc='从 '+fmt(s.initial)+' 出发，点「走一步」，看看它会到哪里';
+  if(s.steps>0){
+    if(s.initial===0 || s.rate===0.5){title='到达最低点';desc='当前位置为 0，函数值也为 0。之后会留在这里';}
+    else if(s.rate===0){title='它没有移动';desc='学习率为 0，每一步的位移也是 0';}
+    else if(s.rate<0.5){title='在同一侧接近最低点';desc='每步把位置乘以 '+fmt(1-2*s.rate)+'，绝对值逐渐减小';}
+    else if(s.rate<1){title='越过最低点，也能继续接近';desc='位置正负交替，但绝对值逐渐减小。观察数字的变化';}
+    else if(s.rate===1){title='在两侧持续振荡';desc='每一步都把位置变成相反数，距离没有缩小';}
+    else{title='步子太大，越走越远';desc='位置正负交替，绝对值越来越大。图形坐标也会随之放大';}
+  }
+  if(state.stopped){title='已到演示上限';desc='达到 100 步或下一步坐标将超过 10⁶。点击「回到起点」重新实验';}
+  $('state-label').textContent=title;$('state-description').textContent=desc;
+  const previous=state.history.length>1?state.history.at(-2):s.initial;
+  $('calculation').textContent=(s.steps?'刚才这一步：':'手算第一步：')+fmt(previous)+' − '+fmt(s.rate)+' × 2 × ('+fmt(previous)+') = '+fmt(previous-s.rate*2*previous);
+  draw();
+}
+function draw(){
+  const svg=$('chart'), w=Math.max(260,$('plot').clientWidth-16), h=w<460?300:368;
+  const margin={left:62,right:27,top:26,bottom:44}, pw=w-margin.left-margin.right, ph=h-margin.top-margin.bottom;
+  const extent=Math.max(3,...state.history.map(x=>Math.abs(x)*1.17)), ymax=extent*extent*1.05;
+  const px=x=>margin.left+(x+extent)/(2*extent)*pw, py=y=>h-margin.bottom-y/ymax*ph;
+  const label=n=>Math.abs(n)>=10000?n.toExponential(1):Number(n.toFixed(2)).toString();
+  let marks='';
+  for(let i=0;i<=4;i++){const y=ymax*i/4;marks+='<line x1="'+margin.left+'" x2="'+(w-margin.right)+'" y1="'+py(y)+'" y2="'+py(y)+'" stroke="#e5eaf2"/><text x="'+(margin.left-9)+'" y="'+(py(y)+4)+'" text-anchor="end">'+label(y)+'</text>';}
+  for(let i=-1;i<=1;i++){const x=i*extent*0.8;marks+='<text x="'+px(x)+'" y="'+(h-18)+'" text-anchor="middle">'+label(x)+'</text>';}
+  let curve='';for(let i=0;i<=160;i++){const x=-extent+i/160*extent*2;curve+=(i?' L':'M')+px(x)+','+py(x*x);}
+  const trail=state.history.map(x=>px(x)+','+py(x*x)).join(' '), last=state.history.at(-1);
+  const dots=state.history.map((x,i)=>'<circle cx="'+px(x)+'" cy="'+py(x*x)+'" r="'+(i===state.history.length-1?6:2.8)+'" fill="'+(i===state.history.length-1?'#007a70':'#b54a13')+'"'+(i===state.history.length-1?' stroke="white" stroke-width="2"':'')+'/>').join('');
+  svg.setAttribute('viewBox','0 0 '+w+' '+h);svg.setAttribute('height',h);
+  svg.innerHTML='<title id="chart-title">梯度下降在抛物线上的轨迹</title><desc id="chart-desc">初始位置 '+fmt(state.initial)+'，学习率 '+fmt(state.rate)+'，已经走了 '+(state.history.length-1)+' 步，当前位置 '+fmt(last)+'。蓝线是函数，橙线是迭代轨迹，绿色点是当前位置。</desc><g font-family="system-ui,sans-serif" font-size="12" fill="#536278">'+marks+'<line x1="'+px(0)+'" x2="'+px(0)+'" y1="'+margin.top+'" y2="'+py(0)+'" stroke="#c5cddd"/><line x1="'+margin.left+'" x2="'+(w-margin.right)+'" y1="'+py(0)+'" y2="'+py(0)+'" stroke="#c5cddd"/><text x="'+margin.left+'" y="16">f(x)</text><text x="'+(w-16)+'" y="'+(h-18)+'">x</text></g><path d="'+curve+'" fill="none" stroke="#2345db" stroke-width="2.5"/><polyline points="'+trail+'" fill="none" stroke="#b54a13" stroke-width="1.5" opacity=".7"/>'+dots;
+}
+function renderNotes(){
+  const list=$('note-list');list.replaceChildren();
+  notes.slice(-5).reverse().forEach(n=>{const li=document.createElement('li'),meta=document.createElement('small'),p=document.createElement('p');meta.textContent=new Date(n.date).toLocaleString('zh-CN')+' · x₀='+fmt(n.initial)+' · α='+fmt(n.rate)+' · '+n.steps+' 步 · x='+fmt(n.x);p.textContent=n.text;li.append(meta,p);list.append(li);});
+  $('export').disabled=notes.length===0;
+}
+function saveNote(){
+  const text=$('observation').value.trim();if(!text){$('save-status').textContent='先写下一句话，再保存这次观察';$('observation').focus();return;}
+  if(notes.length>=100){$('save-status').textContent='已保存 100 条，请先导出备份。本页达到记录上限';return;}
+  const s=snapshot();notes.push({text,date:new Date().toISOString(),initial:s.initial,rate:s.rate,steps:s.steps,x:s.x});
+  const saved=persist();renderNotes();$('observation').value='';$('save-status').textContent=saved?'已保存在这个浏览器中，共 '+notes.length+' 条。建议导出手记备份':'已暂存在当前页面；浏览器存储不可用，请现在导出，关闭页面会丢失';
+}
+function exportNotes(){
+  const lines=['# 万物手记 · 梯度下降实验','', '模型：f(x)=x²；xₖ₊₁=(1−2α)xₖ',''];
+  notes.forEach((n,i)=>lines.push('## 观察 '+(i+1),'', '时间：'+n.date,'', '参数：x₀='+n.initial+'，α='+n.rate+'，步数='+n.steps,'', '结果：x='+n.x+'，f(x)='+n.x*n.x,'',n.text,''));
+  let backup=$('backup-content');
+  if(!backup){const wrap=document.createElement('details'),label=document.createElement('summary');label.textContent='查看备份文本：也可复制后另存为 .md';backup=document.createElement('textarea');backup.id='backup-content';backup.readOnly=true;backup.setAttribute('aria-label','完整手记备份文本');wrap.append(label,backup);$('save-status').after(wrap);}
+  backup.value=lines.join('\n');backup.parentElement.open=true;
+  const url=URL.createObjectURL(new Blob(['\ufeff'+lines.join('\n')],{type:'text/markdown;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='万物手记-梯度下降-'+new Date().toISOString().slice(0,10)+'.md';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);$('save-status').textContent='已发起手记下载，请在浏览器下载列表中确认文件';
+}
+$('initial').addEventListener('change',applyInputs);$('rate').addEventListener('change',applyInputs);
+$('rate-slider').addEventListener('input',()=>{$('rate').value=$('rate-slider').value;applyInputs();});
+$('step').addEventListener('click',()=>advance(1));$('ten').addEventListener('click',()=>advance(10));$('reset').addEventListener('click',()=>configure(state.initial,state.rate));
+document.querySelectorAll('[data-rate]').forEach(b=>b.addEventListener('click',()=>configure(2,Number(b.dataset.rate))));
+$('save').addEventListener('click',saveNote);$('export').addEventListener('click',exportNotes);
+new ResizeObserver(draw).observe($('plot'));renderNotes();update();
+if(!storageAvailable)$('save-status').textContent='浏览器存储不可用；记录后请导出备份，关闭页面会丢失';
+// 支持此接口的浏览器可让助手使用与按钮相同的计算动作。
+if(document.modelContext?.registerTool){
+  const life=new AbortController();window.addEventListener('pagehide',()=>life.abort(),{once:true});
+  const register=tool=>{try{Promise.resolve(document.modelContext.registerTool(tool,{signal:life.signal})).catch(()=>{});}catch{}};
+  register({name:'read_gradient_experiment',description:'Read the current parameters and numerical result of the visible experiment.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>snapshot()});
+  register({name:'configure_gradient_experiment',description:'Set initial position and learning rate, resetting the visible experiment to step zero.',inputSchema:{type:'object',properties:{initial:{type:'number',minimum:-5,maximum:5},rate:{type:'number',minimum:0,maximum:1.2}},required:['initial','rate'],additionalProperties:false},execute:input=>{configure(input.initial,input.rate);return snapshot();}});
+  register({name:'advance_gradient_experiment',description:'Advance the visible experiment by the requested number of steps.',inputSchema:{type:'object',properties:{steps:{type:'integer',minimum:1,maximum:100}},required:['steps'],additionalProperties:false},execute:input=>advance(input.steps)});
+}
+</script>
+</body>
+</html>
