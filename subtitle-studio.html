@@ -316,7 +316,7 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
     exportCancel=()=>{abort=true;video.pause();if(recorder&&recorder.state!=='inactive')recorder.stop();};
     try{
       const loaded=waitEvent(video,'loadeddata');video.src=sourceUrl;video.load();await loaded;if(token!==epoch)return;
-      const AC=window.AudioContext||window.webkitAudioContext;audioCtx=new AC();await audioCtx.resume();const audioNode=audioCtx.createMediaElementSource(video),dest=audioCtx.createMediaStreamDestination();audioNode.connect(dest);
+      const AC=window.AudioContext||window.webkitAudioContext;audioCtx=new AC();await audioCtx.resume();if(abort||token!==epoch)return;const audioNode=audioCtx.createMediaElementSource(video),dest=audioCtx.createMediaStreamDestination();audioNode.connect(dest);
       stream=exportCanvas.captureStream(30);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
       recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:6_000_000,audioBitsPerSecond:128000});const parts=[];recorder.ondataavailable=e=>{if(e.data.size)parts.push(e.data);};
       const stopped=new Promise((resolve,reject)=>{recorder.onstop=resolve;recorder.onerror=e=>reject(new Error(e.error?.message||'录制失败'));});
@@ -329,7 +329,7 @@ lucide.createIcons({icons});\``);if(typeof document>"u")throw new Error("`create
       const blob=new Blob(parts,{type:recorder.mimeType||mime});if(blob.size<100)throw new Error('导出文件为空');resultUrl=URL.createObjectURL(blob);$('download-video').hidden=false;$('download-video').onclick=()=>{const a=document.createElement('a');a.href=resultUrl;a.download=baseName()+'-subtitled.'+(mime.includes('mp4')?'mp4':'webm');a.click();};
       $('export-status').textContent=`成片已就绪 · ${d.width} × ${d.height} · ${(blob.size/1024/1024).toFixed(1)} MB · ${mime.includes('mp4')?'MP4':'WebM'}`;status('导出完成，可以下载成片');
     }catch(e){$('export-status').textContent=`导出未完成：${e.message}`;status('视频导出失败，仍可下载字幕文件',true);}
-    finally{exportCancel=null;if(stopClock)stopClock();if(recorder&&recorder.state!=='inactive')recorder.stop();if(stream)stream.getTracks().forEach(t=>t.stop());if(audioCtx)await audioCtx.close();if(wakeLock)await wakeLock.release().catch(()=>{});video.pause();video.removeAttribute('src');video.load();video.remove();busy=false;$('progress').hidden=true;updateControls();render();}
+    finally{exportCancel=null;if(stopClock)stopClock();if(recorder&&recorder.state!=='inactive')recorder.stop();if(stream)stream.getTracks().forEach(t=>t.stop());if(audioCtx)await audioCtx.close();if(wakeLock)await wakeLock.release().catch(()=>{});video.pause();video.removeAttribute('src');video.load();video.remove();if(abort){status('导出已取消，当前字幕保留');$('export-status').textContent='导出已取消，字幕和视频保留';}busy=false;$('progress').hidden=true;updateControls();render();}
   }
   $('export-video').onclick=exportVideo;
   // A real demo file is created locally from the bundled public photograph and speech recording.
